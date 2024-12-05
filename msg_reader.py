@@ -1,13 +1,20 @@
-
+import pandas as pd
 import typing as t
 import yaml
 
 
-class Data:
+class Templates:
     def __init__(self, list_msg: t.Dict[str, str]) -> None:
         self.list_msg = list_msg
         for k, v in self.list_msg.items():
             setattr(self, k, v)
+
+    def as_dataframe(self):
+        df = pd.DataFrame(
+            {"Template": list(set(self.list_msg.values()))}
+        )
+        df["Event ID"] = list(df.index)
+        return df
 
     def __getitem__(self, msg_name: str) -> str:
         return self.list_msg[msg_name]
@@ -36,7 +43,7 @@ class Messages:
                 setattr(self, name, self.list_msgs[name])
                 templates[name] = None
 
-        self.templates = Data(templates)   
+        self.templates = Templates(templates)   
 
     def __init__(self, msgs: t.Dict[str, str], version: int = 1) -> None:
         self.version  = version

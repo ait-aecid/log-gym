@@ -1,4 +1,4 @@
-from msg_reader import Messages, Data
+from msg_reader import Messages, Templates
 
 import pandas as pd
 import typing as t
@@ -44,19 +44,19 @@ class ParserMethods:
 
 def get_events(
     structured_logs: t.Dict[str, t.List[str]], 
-    templates: pd.DataFrame,
     list_msgs: t.Dict[str, t.List[str]],
-    templates_inst: Data,
+    templates: Templates,
 ) -> t.Dict[str, t.List[str]]:
     
+    temp_df = templates.as_dataframe()
     templates_logs, event_ids = [], []
     for log in structured_logs["Content"]:
         found_it = False
         for name, msg in list_msgs.items():
             if log == msg:
-                templates_logs.append(templates_inst[name])
-                idx = templates["Template"] == templates_logs[-1]
-                event_ids.append(templates["Event ID"][idx].iloc[0])
+                templates_logs.append(templates[name])
+                idx = temp_df["Template"] == templates_logs[-1]
+                event_ids.append(temp_df["Event ID"][idx].iloc[0])
                 found_it = True
                 break
         assert found_it, f"({log}) was not found"
@@ -74,29 +74,21 @@ class Parser(Messages):
     @classmethod
     def from_file(cls, path_file: str, version: int = 1) -> t.Self:
         return super().from_file(path_file, version)
-
-    def __add_templates(self) -> pd.DataFrame:
-        df = pd.DataFrame(
-            {"Template": list(set(self.templates.list_msg.values()))}
-        )
-        df["Event ID"] = list(df.index)
-        return df
-    
+ 
     def __add_structured_logs(
         self, logs: t.List[str], templates: pd.DataFrame
     ) -> pd.DataFrame:
         structured_logs = ParserMethods.structure_logs(logs)
         structured_logs = get_events(
             structured_logs=structured_logs, 
-            templates=templates, 
             list_msgs=self.list_msgs, 
-            templates_inst=self.templates
+            templates=self.templates
         ) 
         structured_logs = ParserMethods.get_variables(structured_logs)
         return pd.DataFrame(structured_logs)
 
     def __call__(self, logs: t.List[str]) -> t.Dict[str, pd.DataFrame]:
-        results = {"Templates": self.__add_templates()}
+        results = {"Templates": self.templates.as_dataframe()} 
         results["Structured logs"] = self.__add_structured_logs(
             logs=logs, templates=results["Templates"]
         )
