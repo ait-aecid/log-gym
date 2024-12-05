@@ -4,6 +4,9 @@ import yaml
 
 
 class Templates:
+    """
+    Wrapper class for the different log templates
+    """
     def __init__(self, list_msg: t.Dict[str, str]) -> None:
         self.list_msg = list_msg
         for k, v in self.list_msg.items():
@@ -21,6 +24,9 @@ class Templates:
 
 
 class Messages:
+    """
+    Manager class of all the log and template messages.    
+    """
     def __is_log(self, msg: str) -> bool:
         return msg.startswith(f"v{self.version}") and "template" not in msg
 
