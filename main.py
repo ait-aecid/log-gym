@@ -1,7 +1,7 @@
 
 from process.resources.simulation import start_simulation
 from backbone.parser import Parser
-from utils import purple, blue
+from utils import Color 
 import backbone.logs as logs
 
 import argparse
@@ -46,16 +46,16 @@ if __name__ == "__main__":
     )
     print(report)
 
-    print(purple("Parsing"))
+    print(Color.purple("Parsing"))
     parser = Parser.from_file(msg_path, version=args.version)
     results = parser.load_logs(logs.path_logs)
 
     results["Templates"].to_csv(
         path_t := "results/template.csv", index=False
     )
-    print(f"{blue('Templates saved in')} {path_t}")
+    print(f"{Color.blue('Templates saved in')} {path_t}")
 
     results["Structured logs"].to_csv(
         path_s := "results/structured_logs.csv", index=False
     )
-    print(f"{blue('Structured logs saved in')} {path_s}")
+    print(f"{Color.blue('Structured logs saved in')} {path_s}")

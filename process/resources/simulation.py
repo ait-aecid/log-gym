@@ -1,7 +1,7 @@
 
 from process.resources import methods
 from backbone.msg_reader import Messages
-from utils import blue, purple
+from utils import Color
 
 from tqdm import tqdm
 import time
@@ -35,20 +35,20 @@ def start_simulation(
     msg_path = "process/resources/messages.yaml"
     msg = Messages.from_file(msg_path, version=version)
 
-    print(purple("Start simulation"))
+    print(Color.purple("Start simulation"))
     start = time.time()
     for _ in tqdm(range(num_sim)):
         main(case=case, msg=msg, config=config)
     end = time.time() - start
 
-    report = f"{purple('Process simulation report')}\n"
-    report += f"    - {blue('Case')}: {cases[case].__name__}\n"
-    report += f"    - {blue('Description')}: {cases[case].__doc__.replace('\n', '')}\n"
-    report += f"    - {blue('Logs version')} {version}\n"
-    report += f"    - {blue('Number of simulations')} {num_sim}\n"
-    report += f"    - {blue('Do anomalies')}: {'Yes' if do_anomaly else 'No'}\n"
-    report += f"    - {blue('Logs stored in file')}: {'Yes' if logs.store_logs else 'No'}\n"
-    report += f"    - {blue('Logs file')}: {logs.path_logs}\n"
-    report += f"    - {blue('Total time simulation')}: {end}\n"
+    report = f"{Color.purple('Process simulation report')}\n"
+    report += f"    - {Color.blue('Case')}: {cases[case].__name__}\n"
+    report += f"    - {Color.blue('Description')}: {cases[case].__doc__.replace('\n', '')}\n"
+    report += f"    - {Color.blue('Logs version')} {version}\n"
+    report += f"    - {Color.blue('Number of simulations')} {num_sim}\n"
+    report += f"    - {Color.blue('Do anomalies')}: {'Yes' if do_anomaly else 'No'}\n"
+    report += f"    - {Color.blue('Logs stored in file')}: {'Yes' if logs.store_logs else 'No'}\n"
+    report += f"    - {Color.blue('Logs file')}: {logs.path_logs}\n"
+    report += f"    - {Color.blue('Total time simulation')}: {end}\n"
 
     return report, msg_path
