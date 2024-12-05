@@ -14,7 +14,12 @@ msgs = {
     "message_2": {
         "v2": "general kenobi",
         "v2_template": "general <*>"
-    }
+    },
+    "message_3": {
+        "v1": "vamos a la playa",
+        "v1_template": "vamos a la <*>"
+    },
+
 }
 
 
@@ -68,3 +73,10 @@ class MessagesTestCase(unittest.TestCase):
         self.assertEqual(None, msgs1.templates.message_2)
         self.assertEqual("general <*>", msgs2.templates["message_2"])
         self.assertEqual("general <*>", msgs2.templates.message_2)
+
+    def test_delete_version(self) -> None:
+        msgs1 = Messages(msgs=msgs, version=1)
+        msgs2 = Messages(msgs=msgs, version=2)
+
+        self.assertEqual("vamos a la playa", msgs1["message_3"])
+        self.assertEqual(None, msgs2["message_3"])
