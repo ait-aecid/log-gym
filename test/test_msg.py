@@ -1,5 +1,5 @@
 
-from msg_reader import Messages
+from backbone.msg_reader import Messages
 
 import unittest
 

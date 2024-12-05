@@ -6,7 +6,7 @@ from process.resources.methods import (
     case3_init_resource,
 )
 from process.resources.simulation import main
-from msg_reader import Messages
+from backbone.msg_reader import Messages
 
 import unittest
 
@@ -31,7 +31,7 @@ class ProcessTestCase(unittest.TestCase):
             self.assertTrue(value_1 > value_2)
 
     def test_case1_nominal(self):
-        import logs 
+        import backbone.logs as logs 
         logs.store_logs = False
         logs.as_test()
 
@@ -43,7 +43,7 @@ class ProcessTestCase(unittest.TestCase):
         self.assertTrue(" INFO:Test Resource ready" in logs.history)
 
     def test_case1_anominal(self):
-        import logs 
+        import backbone.logs as logs 
         logs.store_logs = False
         logs.as_test()
 
@@ -56,7 +56,7 @@ class ProcessTestCase(unittest.TestCase):
         self.assertTrue(" INFO:Test Resource ready" not in logs.history)
 
     def test_case2_nominal(self):
-        import logs 
+        import backbone.logs as logs 
         logs.store_logs = False
         logs.as_test()
 
@@ -68,7 +68,7 @@ class ProcessTestCase(unittest.TestCase):
         self.assertTrue(" INFO:Test Resource ready" in logs.history)
 
     def test_case2_anominal(self):
-        import logs 
+        import backbone.logs as logs 
         logs.store_logs = False
         logs.as_test()
 
@@ -81,7 +81,7 @@ class ProcessTestCase(unittest.TestCase):
         self.assertTrue(" INFO:Test Resource ready" not in logs.history)
 
     def test_case3_nominal(self):
-        import logs 
+        import backbone.logs as logs 
         logs.store_logs = False
         logs.as_test()
 
@@ -93,7 +93,7 @@ class ProcessTestCase(unittest.TestCase):
         self.assertTrue(" INFO:Test Errors found False" in logs.history)
 
     def test_case3_anominal(self):
-        import logs 
+        import backbone.logs as logs 
         logs.store_logs = False
         logs.as_test()
 
@@ -106,7 +106,7 @@ class ProcessTestCase(unittest.TestCase):
         self.assertTrue(" INFO:Test Errors found True" in logs.history)
 
     def test_main(self):
-        import logs 
+        import backbone.logs as logs 
         logs.store_logs = False
         logs.as_test()
 

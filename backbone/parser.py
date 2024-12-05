@@ -1,4 +1,4 @@
-from msg_reader import Messages, Templates
+from backbone.msg_reader import Messages, Templates
 
 import pandas as pd
 import typing as t

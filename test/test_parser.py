@@ -1,5 +1,5 @@
 
-from parser import ParserMethods, Parser
+from backbone.parser import ParserMethods, Parser
 
 import unittest
 

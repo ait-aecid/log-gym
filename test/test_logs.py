@@ -5,7 +5,7 @@ import os
 
 class LogsTestCase(unittest.TestCase):
     def test_change_logs(self) -> None:
-        import logs
+        import backbone.logs as logs
         self.assertTrue(logs.store_logs)
 
         logs.store_logs = False
@@ -14,7 +14,7 @@ class LogsTestCase(unittest.TestCase):
         self.assertEqual(logs.path_logs, "test/logs_tests/")
 
     def test_store_logs(self) -> None:
-        import logs
+        import backbone.logs as logs
         logs.as_test()
         logs.store_logs = True
         logs.path_logs = "test/logs_tests/store_logs.log"
@@ -28,7 +28,7 @@ class LogsTestCase(unittest.TestCase):
         self.assertTrue(os.path.isfile(logs.path_logs))
 
     def test_not_store_logs(self) -> None:
-        import logs
+        import backbone.logs as logs
         logs.as_test()
         logs.store_logs = False
         logs.history = []
@@ -42,7 +42,7 @@ class LogsTestCase(unittest.TestCase):
         self.assertFalse(os.path.isfile(logs.path_logs))
 
     def test_messages(self) -> None:
-        import logs
+        import backbone.logs as logs
         logs.as_test()
         logs.store_logs = False
         logs.history = []
@@ -61,7 +61,7 @@ class LogsTestCase(unittest.TestCase):
         ], logs.history)
 
     def test_messages_none(self) -> None:
-        import logs
+        import backbone.logs as logs
         logs.as_test()
         logs.store_logs = False
         logs.history = []

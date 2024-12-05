@@ -1,7 +1,7 @@
-from msg_reader import Messages
+from backbone.msg_reader import Messages
 
 import numpy as np
-import logs
+import backbone.logs as logs
 import time
 
 

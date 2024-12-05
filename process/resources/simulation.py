@@ -1,11 +1,11 @@
 
 from process.resources import methods
-from msg_reader import Messages
+from backbone.msg_reader import Messages
 from utils import blue, purple
 
 from tqdm import tqdm
 import time
-import logs
+import backbone.logs as logs
 
 from typing import Tuple
 

@@ -1,8 +1,8 @@
 
 from process.resources.simulation import start_simulation
-from parser import Parser
+from backbone.parser import Parser
 from utils import purple, blue
-import logs
+import backbone.logs as logs
 
 import argparse
 
