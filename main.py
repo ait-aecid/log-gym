@@ -5,57 +5,44 @@ from utils import Color
 import backbone.logs as logs
 
 import argparse
+import yaml
 
-# %% Configure logs
-logs.store_logs = True
-logs.path_logs = "results/simulation_logs_anomaly.log"
-logs.update_configuration()
 
 # %% Configure argparser
 parser = argparse.ArgumentParser(description="Run log simulation")
 parser.add_argument(
-    "--case", type=str, help="Case to use in the simulation", required=True
+    "--config_file", type=str, help="Simulation config file", required=True
 )
-parser.add_argument(
-    "--num_sim", 
-    type=int, 
-    help="Number of runs done in the simulation",
-    default=100,
-)
-parser.add_argument(
-    "--version", 
-    type=int, 
-    help="Versaion number use in the logs",
-    default=1,
-)
-parser.add_argument(
-    "--do_anomaly", 
-    action="store_true", 
-    help="Run simulation as anomalies"
-)  
 
 # %% Run simulation
 if __name__ == "__main__":
     args = parser.parse_args()
+
+    with open(args.config_file) as file:
+        config = yaml.safe_load(file)
+
+    logs.store_logs = config["Logs"]["store_logs"]
+    logs.path_logs = config["Logs"]["path_logs"]
+    logs.update_configuration()
     
     report, msg_path = start_simulation(
-        do_anomaly=args.do_anomaly,
-        case=args.case,
-        num_sim=args.num_sim,
-        version=args.version,
+        do_anomaly=config["Specific"]["As_anomaly"],
+        case=config["General"]["Case"],
+        num_sim=config["General"]["Number_simulations"],
+        version=config["Specific"]["Version"],
     )
     print(report)
 
     print(Color.purple("Parsing"))
-    parser = Parser.from_file(msg_path, version=args.version)
+    parser = Parser.from_file(msg_path, version=config["Specific"]["Version"])
     results = parser.load_logs(logs.path_logs)
 
     results["Templates"].to_csv(
-        path_t := "results/template.csv", index=False
+        path_t := config["Results"]["templates_path"], index=False
     )
     print(f"{Color.blue('Templates saved in')} {path_t}")
 
     results["Structured logs"].to_csv(
-        path_s := "results/structured_logs.csv", index=False
+        path_s := config["Results"]["structured_logs_path"], index=False
     )
     print(f"{Color.blue('Structured logs saved in')} {path_s}")

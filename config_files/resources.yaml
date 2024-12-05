@@ -1,0 +1,17 @@
+
+General:
+    Simulation: resource
+    Case: case_1
+    Number_simulations: 100
+
+Specific:
+    Version: 1
+    As_anomaly: False
+
+Logs:
+    store_logs: True
+    path_logs: results/simulation_logs_anomaly.log
+
+Results:
+    templates_path: results/template.csv
+    structured_logs_path: results/structured_logs.csv
