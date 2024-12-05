@@ -1,0 +1,9 @@
+message_1:
+  v1: "hello there"
+  v1_template: "hello <*>"
+  v2: "general kenobi"
+  v2_template: "general <*>"
+
+message_2:
+  v2: "general kenobi"
+  v2_template: "general <*>"

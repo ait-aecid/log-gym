@@ -1,0 +1,12 @@
+
+resource_ready:
+    v1: "Resource ready"
+    v1_template: "Resource ready"
+
+start_process:
+    v1: "Process has started ok"
+    v1_template: "Process has<*><*>"
+
+end_process:
+    v1: "Process has ended"
+    v1_template: "Process has<*>"

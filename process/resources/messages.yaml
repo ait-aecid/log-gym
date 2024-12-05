@@ -1,0 +1,50 @@
+
+ready_to_initialize:
+    v2: "Ready to initialize: resource"
+    v2_template: "Ready to initialize:<*>"
+
+resource_ready:
+    v1: "Resource ready"
+    v1_template: "Resource ready"
+    v2: "Resource ready"
+    v2_template: "Resource ready"
+
+try_again:
+    v1: "Trying again later"
+    v1_template: "Trying again later"
+    v2: "Unable to connect, trying againg later"
+    v2_template: "Unable to connect, trying againg later"
+
+not_able_access:
+    v1: "Not abale to access: resource"
+    v1_template: "Not abale to access:<*>"
+    v2: "Not able to access: resource"
+    v2_template: "Not able to access:<*>"
+
+errors_found_false:
+    v1: "Errors found False"
+    v1_template: "Errors found<*>"
+    v2: "Errors found False"
+    v2_template: "Errors found<*>"
+
+errors_found_true:
+    v1: "Errors found True"
+    v1_template: "Errors found<*>"
+    v2: "Errors found True"
+    v2_template: "Errors found<*>"
+
+start_process:
+    v1: "Process has started"
+    v1_template: "Process has<*>"
+    v2: "The process has started"
+    v2_template: "The process has<*>"
+
+ajusting:
+    v2: "It may take a little to ajust"
+    v2_template: "It may take a little to ajust"
+
+end_process:
+    v1: "Process has ended"
+    v1_template: "Process has<*>"
+    v2: "The process has ended"
+    v2_template: "The process has<*>"
