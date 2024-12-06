@@ -1,0 +1,43 @@
+start_process:
+    v1: Dependency libray has started
+    v1_template: Dependency library has<*>
+
+load_a:
+    v1: Dependency a is loading
+    v1_template: Dependency a is<*>
+
+load_a_fail:
+    v1: Dependency a failed to load
+    v1_template: Dependency<*>failed to load
+
+load_a_done:
+    v1: Dependency a is ready
+    v1_template: Dependency a is<*>
+
+load_b:
+    v1: Dependency b is loading
+    v1_template: Dependency b is<*>
+
+load_b_done:
+    v1: Dependency b is ready
+    v1_template: Dependency b is<*>
+
+load_c:
+    v1: Dependency c is loading
+    v1_template: Dependency c is<*>
+
+load_c_done:
+    v1: Dependency c is ready
+    v1_template: Dependency c is<*>
+
+load_d:
+    v1: Dependency d is loading
+    v1_template: Dependency d is<*>
+
+load_d_done:
+    v1: Dependency d is ready
+    v1_template: Dependency d is<*>
+
+end_process:
+    v1: Dependency libray has ended
+    v1_template: Dependency library has<*>
