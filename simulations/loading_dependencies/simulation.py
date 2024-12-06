@@ -1,44 +1,43 @@
 
-from simulations.access_resource import methods
+from simulations.loading_dependencies import methods
+
 from backbone.msg_reader import Messages
+import backbone.logs as logs
+
 from utils import Color
 
 from tqdm import tqdm
 import time
-import backbone.logs as logs
 
 from typing import Tuple
 
 
-
 cases = {
-    "case_1": methods.case1_init_resource,
-    "case_2": methods.case2_init_resource,
-    "case_3": methods.case3_init_resource,
+    "case_1": methods.case_1_easier_case,
+    "case_2": methods.case_2_exchange_times,
+    "case_3": methods.case_3_small_difference,
 }
 
 
-def main(case: str, msg: Messages, config: methods.ConfigResource) -> None:
-    logs.trace(msg.start_process)
+def main(case: str, msg: Messages, do_anomaly: bool) -> None:
+    logs.trace(msg.start_simulation)
     case_method = cases[case]
-    case_method(config=config, msg=msg)
-    logs.warning(msg.ajusting)
-    logs.trace(msg.end_process)
+    case_method(msg=msg, do_anomaly=do_anomaly)
+    logs.trace(msg.end_simulation)
 
 
 def start_simulation(
     do_anomaly: bool, case: str, num_sim: int, version: int
 ) -> Tuple[str, str]:
     
-    config = methods.ConfigResource()
-    config.do_anomaly = do_anomaly
-    msg_path = "simulations/resources/messages.yaml"
+    msg_path = "simulations/loading_dependencies/messages.yaml"
+    print(msg_path)
     msg = Messages.from_file(msg_path, version=version)
 
     print(Color.purple("Start simulation"))
     start = time.time()
     for _ in tqdm(range(num_sim)):
-        main(case=case, msg=msg, config=config)
+        main(case=case, msg=msg, do_anomaly=do_anomaly)
     end = time.time() - start
 
     report = f"{Color.purple('Process simulation report')}\n"

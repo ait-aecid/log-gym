@@ -1,3 +1,11 @@
+start_simulation:
+    v1: Start simulation
+    v1_template: <*>simulation
+
+end_simulation:
+    v1: End simulation
+    v1_template: <*>simulation
+
 start_process:
     v1: Dependency libray has started
     v1_template: Dependency library has<*>
