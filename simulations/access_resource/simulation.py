@@ -1,54 +1,36 @@
 
+from simulations._isimulation import ISimulation
 from simulations.access_resource import methods
-from backbone.msg_reader import Messages
-from utils import Color
 
-from tqdm import tqdm
-import time
+from backbone.msg_reader import Messages
 import backbone.logs as logs
 
-from typing import Tuple
+import typing as t
 
 
+class AccessResources(ISimulation):
+    """
+    Access Resource challenge
+    """
+    def __init__(self) -> None:
+        super().__init__(
+            cases={
+                "case_1": methods.case1_init_resource,
+                "case_2": methods.case2_init_resource,
+                "case_3": methods.case3_init_resource,
+            }, 
+            msg_path="simulations/access_resource/messages.yaml"
+        )
 
-cases = {
-    "case_1": methods.case1_init_resource,
-    "case_2": methods.case2_init_resource,
-    "case_3": methods.case3_init_resource,
-}
+    def main(
+        self, case: t.Callable[[t.Any], None], msg: Messages, do_anomaly: bool,
+    ) -> None:
+        
+        config = methods.ConfigResource()
+        config.do_anomaly = do_anomaly
 
+        logs.trace(msg.start_process)
+        case(config=config, msg=msg)
+        logs.warning(msg.ajusting)
+        logs.trace(msg.end_process)
 
-def main(case: str, msg: Messages, config: methods.ConfigResource) -> None:
-    logs.trace(msg.start_process)
-    case_method = cases[case]
-    case_method(config=config, msg=msg)
-    logs.warning(msg.ajusting)
-    logs.trace(msg.end_process)
-
-
-def start_simulation(
-    do_anomaly: bool, case: str, num_sim: int, version: int
-) -> Tuple[str, str]:
-    
-    config = methods.ConfigResource()
-    config.do_anomaly = do_anomaly
-    msg_path = "simulations/resources/messages.yaml"
-    msg = Messages.from_file(msg_path, version=version)
-
-    print(Color.purple("Start simulation"))
-    start = time.time()
-    for _ in tqdm(range(num_sim)):
-        main(case=case, msg=msg, config=config)
-    end = time.time() - start
-
-    report = f"{Color.purple('Process simulation report')}\n"
-    report += f"    - {Color.blue('Case')}: {cases[case].__name__}\n"
-    report += f"    - {Color.blue('Description')}: {cases[case].__doc__.replace('\n', '')}\n"
-    report += f"    - {Color.blue('Logs version')} {version}\n"
-    report += f"    - {Color.blue('Number of simulations')} {num_sim}\n"
-    report += f"    - {Color.blue('Do anomalies')}: {'Yes' if do_anomaly else 'No'}\n"
-    report += f"    - {Color.blue('Logs stored in file')}: {'Yes' if logs.store_logs else 'No'}\n"
-    report += f"    - {Color.blue('Logs file')}: {logs.path_logs}\n"
-    report += f"    - {Color.blue('Total time simulation')}: {end}\n"
-
-    return report, msg_path

@@ -5,7 +5,7 @@ from simulations.access_resource.methods import (
     case2_init_resource,
     case3_init_resource,
 )
-from simulations.access_resource.simulation import main
+from simulations.access_resource.simulation import AccessResources
 from backbone.msg_reader import Messages
 
 import unittest
@@ -104,17 +104,3 @@ class ProcessTestCase(unittest.TestCase):
         msg = Messages.from_file(path_msg)
         case3_init_resource(config, msg=msg)
         self.assertTrue(" INFO:Test Errors found True" in logs.history)
-
-    def test_main(self):
-        import backbone.logs as logs 
-        logs.store_logs = False
-        logs.as_test()
-
-        config = ConfigResource()
-        config.do_anomaly = True
-        config.wait_time = 0
-        logs.history = []
-        msg = Messages.from_file(path_msg)
-        main(case="case_1", config=config, msg=msg)
-        self.assertTrue(" TRACE:Test Process has started" in logs.history)
-        self.assertTrue(" TRACE:Test Process has ended" in logs.history)

@@ -26,7 +26,8 @@ if __name__ == "__main__":
     logs.update_configuration()
 
     print(Color.yellow(f"Initializing... {config['General']['Simulation']}")) 
-    report, msg_path = challenges[config["General"]["Simulation"]](
+    challenge = challenges[config["General"]["Simulation"]]()
+    report, msg_path = challenge.start_simulation(
         do_anomaly=config["Specific"]["As_anomaly"],
         case=config["General"]["Case"],
         num_sim=config["General"]["Number_simulations"],
