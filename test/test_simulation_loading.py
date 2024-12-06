@@ -113,6 +113,10 @@ path_msg = "simulations/loading_dependencies/messages.yaml"
 
 class CasesTestCase(unittest.TestCase):
     def test_case1_dont_break(self) -> None:
+        import backbone.logs as logs 
+        logs.store_logs = False
+        logs.as_test()
+
         msg = methods.Messages.from_file(path_msg)
         methods.case_1_easier_case(do_anomaly=False, msg=msg, reduction=700)
 
@@ -120,6 +124,10 @@ class CasesTestCase(unittest.TestCase):
         methods.case_1_easier_case(do_anomaly=True, msg=msg, reduction=700)
 
     def test_case2_dont_break(self) -> None:
+        import backbone.logs as logs 
+        logs.store_logs = False
+        logs.as_test()
+
         msg = methods.Messages.from_file(path_msg)
         methods.case_2_exchange_times(do_anomaly=False, msg=msg, reduction=700)
 
@@ -127,6 +135,10 @@ class CasesTestCase(unittest.TestCase):
         methods.case_2_exchange_times(do_anomaly=True, msg=msg, reduction=700)
 
     def test_case3_dont_break(self) -> None:
+        import backbone.logs as logs 
+        logs.store_logs = False
+        logs.as_test()
+
         msg = methods.Messages.from_file(path_msg)
         methods.case_3_small_difference(do_anomaly=False, msg=msg, reduction=700)
 
