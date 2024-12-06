@@ -81,3 +81,25 @@ def case_2_exchange_times(
         dependencies.add_test_reduction(reduction=reduction)
 
     return code_structure(dependencies=dependencies, msg=msg)
+
+
+def case_3_small_difference(
+    do_anomaly: bool, msg: Messages, reduction: float | None = None
+) -> None:
+    """
+    Same as case 1, but the time difference is much smaller
+    """
+    config = ConfigDependencies()
+    config.do_anomaly = do_anomaly
+    config.args_d = {
+        "nominal": {"radius": 0.74, "mu": 1., "std": 0.5},
+        "anominal": {"radius": 0.2, "mu": 2., "std": 0.3}
+    }
+    
+    dependencies = Dependencies(
+        config=config, anominal_dependency=[False, False, False, True]
+    )
+    if reduction is not None:
+        dependencies.add_test_reduction(reduction=reduction)
+
+    return code_structure(dependencies=dependencies, msg=msg)

@@ -125,3 +125,14 @@ class CasesTestCase(unittest.TestCase):
 
         msg = methods.Messages.from_file(path_msg)
         methods.case_2_exchange_times(do_anomaly=True, msg=msg, reduction=700)
+
+    def test_case3_dont_break(self) -> None:
+        msg = methods.Messages.from_file(path_msg)
+        methods.case_3_small_difference(do_anomaly=False, msg=msg, reduction=700)
+
+        msg = methods.Messages.from_file(path_msg)
+        methods.case_3_small_difference(do_anomaly=True, msg=msg, reduction=700)
+
+    def test_condition_method(self) -> None:
+        self.assertFalse(all([methods.condition() for _ in range(10)]))
+        self.assertTrue(any([methods.condition() for _ in range(10)]))
