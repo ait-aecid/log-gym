@@ -13,6 +13,7 @@ class ConfigResource:
 class Resource:
     def __init__(self, config: ConfigResource) -> None:
         self.do_anomaly = config.do_anomaly
+
     def init(self) -> None:
         p = [1., 0.] if self.do_anomaly else [0.4, 0.6]
         return bool(np.random.choice([0, 1], size=1, p=p))
