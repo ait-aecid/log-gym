@@ -1,6 +1,6 @@
 
 General:
-    Simulation: resource
+    Simulation: Resource_challenge
     Case: case_1
     Number_simulations: 100
 

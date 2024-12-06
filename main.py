@@ -1,8 +1,8 @@
-
-from process.resources.simulation import start_simulation
 from backbone.parser import Parser
-from utils import Color 
 import backbone.logs as logs
+
+from process import challenges
+from utils import Color 
 
 import argparse
 import yaml
@@ -24,8 +24,9 @@ if __name__ == "__main__":
     logs.store_logs = config["Logs"]["store_logs"]
     logs.path_logs = config["Logs"]["path_logs"]
     logs.update_configuration()
-    
-    report, msg_path = start_simulation(
+
+    print(Color.yellow(f"Initializing... {config['General']['Simulation']}")) 
+    report, msg_path = challenges[config["General"]["Simulation"]](
         do_anomaly=config["Specific"]["As_anomaly"],
         case=config["General"]["Case"],
         num_sim=config["General"]["Number_simulations"],
