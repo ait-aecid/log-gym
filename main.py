@@ -1,7 +1,7 @@
 from backbone.parser import Parser
 import backbone.logs as logs
 
-from process import challenges
+from simulations import challenges
 from utils import Color 
 
 import argparse

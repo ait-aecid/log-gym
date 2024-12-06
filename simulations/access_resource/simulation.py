@@ -1,5 +1,5 @@
 
-from process.resources import methods
+from simulations.access_resource import methods
 from backbone.msg_reader import Messages
 from utils import Color
 

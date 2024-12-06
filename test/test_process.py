@@ -1,17 +1,17 @@
-from process.resources.methods import (
+from simulations.access_resource.methods import (
     Resource, 
     ConfigResource,
     case1_init_resource,    
     case2_init_resource,
     case3_init_resource,
 )
-from process.resources.simulation import main
+from simulations.access_resource.simulation import main
 from backbone.msg_reader import Messages
 
 import unittest
 
 
-path_msg = "process/resources/messages.yaml"
+path_msg = "simulations/access_resource/messages.yaml"
 
 class ProcessTestCase(unittest.TestCase):
     def test_do_anomaly(self):        
