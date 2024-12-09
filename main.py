@@ -2,11 +2,16 @@ from backbone.parser import Parser
 import backbone.logs as logs
 
 from simulations import challenges
-from utils import Color 
+from utils import Color, Config 
 
 import argparse
-import yaml
+import os
 
+
+def create_folder(path):
+    folder = "/".join(path.split("/")[:-1])
+    if not os.path.isdir(folder):
+        os.mkdir(folder)
 
 # %% Configure argparser
 parser = argparse.ArgumentParser(description="Run log simulation")
@@ -17,34 +22,38 @@ parser.add_argument(
 # %% Run simulation
 if __name__ == "__main__":
     args = parser.parse_args()
+    config = Config(args.config_file)
+    simulation_type, case = config.get_parameters()
 
-    with open(args.config_file) as file:
-        config = yaml.safe_load(file)
+    print(Color.yellow(f"Doing {simulation_type}")) 
+    for simulation in config.simulations():
+        
+        sim_config = config[simulation]
+        print(Color.yellow(f"Initializing... {simulation}")) 
+        create_folder(sim_config["Results"]["path_logs"])
+        logs.store_logs = sim_config["store_logs"]
+        logs.path_logs = sim_config["Results"]["path_logs"]
+        logs.update_configuration()
 
-    logs.store_logs = config["Logs"]["store_logs"]
-    logs.path_logs = config["Logs"]["path_logs"]
-    logs.update_configuration()
+        challenge = challenges[simulation_type]()
+        report, msg_path = challenge.start_simulation(
+            do_anomaly=sim_config["As_anomaly"],
+            case=case,
+            num_sim=sim_config["Number_simulations"],
+            version=sim_config["Version"],
+        )
+        print(report)
 
-    print(Color.yellow(f"Initializing... {config['General']['Simulation']}")) 
-    challenge = challenges[config["General"]["Simulation"]]()
-    report, msg_path = challenge.start_simulation(
-        do_anomaly=config["Specific"]["As_anomaly"],
-        case=config["General"]["Case"],
-        num_sim=config["General"]["Number_simulations"],
-        version=config["Specific"]["Version"],
-    )
-    print(report)
+        print(Color.purple("Parsing"))
+        parser = Parser.from_file(msg_path, version=sim_config["Version"])
+        results = parser.load_logs(logs.path_logs)
 
-    print(Color.purple("Parsing"))
-    parser = Parser.from_file(msg_path, version=config["Specific"]["Version"])
-    results = parser.load_logs(logs.path_logs)
+        results["Templates"].to_csv(
+            path_t := sim_config["Results"]["templates_path"], index=False
+        )
+        print(f"{Color.blue('Templates saved in')} {path_t}")
 
-    results["Templates"].to_csv(
-        path_t := config["Results"]["templates_path"], index=False
-    )
-    print(f"{Color.blue('Templates saved in')} {path_t}")
-
-    results["Structured logs"].to_csv(
-        path_s := config["Results"]["structured_logs_path"], index=False
-    )
-    print(f"{Color.blue('Structured logs saved in')} {path_s}")
+        results["Structured logs"].to_csv(
+            path_s := sim_config["Results"]["structured_logs_path"], index=False
+        )
+        print(f"{Color.blue('Structured logs saved in')} {path_s}")

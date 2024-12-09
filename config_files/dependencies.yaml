@@ -1,17 +1,37 @@
 
 General:
-    Simulation: Loading_dependencies 
+    Simulation: Loading_dependencies
     Case: case_1
-    Number_simulations: 100
 
-Specific:
+Train:
     Version: 1
     As_anomaly: False
-
-Logs:
     store_logs: True
-    path_logs: results/simulation_logs_anomaly.log
+    Number_simulations: 100
+    
+    Results:
+        path_logs: results/train/simulation_logs_anomaly.log
+        templates_path: results/train/template.csv
+        structured_logs_path: results/train/structured_logs.csv
 
-Results:
-    templates_path: results/template.csv
-    structured_logs_path: results/structured_logs.csv
+Test_normal_v1:
+    Version: 1
+    As_anomaly: False
+    store_logs: True
+    Number_simulations: 100
+    
+    Results:
+        path_logs: results/test_normal_v1/simulation_logs_anomaly.log
+        templates_path: results/test_normal_v1/template.csv
+        structured_logs_path: results/test_normal_v1/structured_logs.csv
+
+Test_abnormal_v1:
+    Version: 1
+    As_anomaly: True
+    store_logs: True
+    Number_simulations: 100
+    
+    Results:
+        path_logs: results/test_abnormal_v1/simulation_logs_anomaly.log
+        templates_path: results/test_abnormal_v1/template.csv
+        structured_logs_path: results/test_abnormal_v1/structured_logs.csv

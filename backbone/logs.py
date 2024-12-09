@@ -19,13 +19,16 @@ def as_test():
 
 def update_configuration():
     if store_logs:
+        log = logging.getLogger()  
+        for hdlr in log.handlers[:]:  
+            log.removeHandler(hdlr)
+
         logging.basicConfig(
             filename=path_logs, 
             encoding="utf-8",
             filemode='w',
             level=logging.DEBUG
         )
-
 
 def __log_format(level: str, msg: str) -> str:
     time = datetime.now().strftime("[%Y-%m-%d/%H:%M:%S]")
