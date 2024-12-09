@@ -1,6 +1,7 @@
+from utils import read_yaml_file
+
 import pandas as pd
 import typing as t
-import yaml
 
 
 class Templates:
@@ -57,8 +58,7 @@ class Messages:
 
     @classmethod
     def from_file(cls, path_file: str, version: int = 1) -> object:
-        with open(path_file, "r") as f:
-            msgs = yaml.safe_load(f)
+        msgs = read_yaml_file(path_file)
         return cls(msgs=msgs, version=version)
 
     def __getitem__(self, msg_name: str) -> str:
