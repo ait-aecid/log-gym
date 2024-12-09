@@ -1,0 +1,12 @@
+Level,Module,Date,Time,Content,Template,Event ID,Variables
+TRACE,Standard,2024-12-09,13:28:26,Process has started,Process has<*>,5,['started']
+INFO,Standard,2024-12-09,13:28:26,Trying again later,Trying again later,4,[]
+INFO,Standard,2024-12-09,13:28:27,Resource ready,Resource ready,3,[]
+TRACE,Standard,2024-12-09,13:28:27,Process has ended,Process has<*>,5,['ended']
+TRACE,Standard,2024-12-09,13:28:27,Process has started,Process has<*>,5,['started']
+INFO,Standard,2024-12-09,13:28:27,Resource ready,Resource ready,3,[]
+TRACE,Standard,2024-12-09,13:28:27,Process has ended,Process has<*>,5,['ended']
+TRACE,Standard,2024-12-09,13:28:27,Process has started,Process has<*>,5,['started']
+INFO,Standard,2024-12-09,13:28:27,Trying again later,Trying again later,4,[]
+INFO,Standard,2024-12-09,13:28:28,Resource ready,Resource ready,3,[]
+TRACE,Standard,2024-12-09,13:28:28,Process has ended,Process has<*>,5,['ended']
