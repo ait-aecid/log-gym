@@ -26,6 +26,20 @@ class TemplateSetTestCase(unittest.TestCase):
         self.assertEqual(tempSet["AB"], 1) 
 
 
+class DatasetTestCase(unittest.TestCase):
+    def test_set_empty_item(self) -> None:
+        dataset = dg.Dataset()
+        dataset["hi"] = [4, 3]
+
+        self.assertListEqual(dataset["hi"], [[4, 3]])
+
+    def test_set_item(self) -> None:
+        dataset = dg.Dataset()
+        dataset["hi"] = [4, 3]
+        dataset["hi"] = [1, 2]
+
+        self.assertListEqual(dataset["hi"], [[4, 3], [1, 2]])
+
 
 first_expected = {
     "Level": ["INFO", "INFO"],
@@ -63,12 +77,24 @@ third_expected = {
 }
 
 
+path_logs = "test/logs_tests/structured_logs.csv"
+
+
 class DataGeneratorTestCase(unittest.TestCase):
     def test_split_process(self):
-        gen = dg.split_in_process(pd.read_csv("test/logs_tests/structured_logs.csv"))
+        gen = dg.split_in_process(pd.read_csv(path_logs))
         expected = [first_expected, second_expected, third_expected]
         for z, table in enumerate(gen):
             table_ = table.to_dict("list")
             for k in table_.keys():
                 self.assertListEqual(expected[z][k], table_[k])
         self.assertEqual(2, z)
+
+    def test_process_table(self) -> None:
+        tempSet = dg.TemplateSet()
+        dataset = dg.process_table(pd.read_csv(path_logs), tempSet=tempSet)
+
+        self.assertListEqual(
+            [["INFO", "INFO"], ["INFO"], ["INFO", "INFO"]], dataset["Level"]
+        )
+        # TODO: do timestamps, templates, message, event ID
