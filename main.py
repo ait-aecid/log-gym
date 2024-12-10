@@ -51,18 +51,18 @@ if __name__ == "__main__":
         results = parser.load_logs(logs.path_logs)
 
         save_csv(
-            results["Templates"], path_t := sim_config["Results"]["templates_path"]
+            path_t := sim_config["Results"]["templates_path"], results["Templates"]
         )
         templates_paths.append(path_t)
         print(f"{Color.blue('Templates saved in')} {path_t}")
 
-        save_csv(
-            results["Structured logs"], 
-            path_s := sim_config["Results"]["structured_logs_path"]
+        save_csv( 
+            path_s := sim_config["Results"]["structured_logs_path"], results["Structured logs"]
         )
         structured_logs_paths.append(path_s)
         print(f"{Color.blue('Structured logs saved in')} {path_s}")
 
+    print(Color.purple("Generating db"))
     create_folder(db_path)
     process_all_tables(
         structured_logs_paths=structured_logs_paths,

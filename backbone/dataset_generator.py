@@ -2,6 +2,7 @@ from utils import save_csv, load_csv
 
 from datetime import datetime
 
+from tqdm import tqdm
 import pandas as pd
 import typing as t
 
@@ -101,7 +102,7 @@ def process_all_tables(
         tempSet.add(load_csv(template_path))
     tempSet.save(f"{save_path}/template.csv")
     
-    for structured_logs_path in structured_logs_paths:
+    for structured_logs_path in tqdm(structured_logs_paths):
         name = structured_logs_path.split("/")[-2]
         process_table(
             load_csv(structured_logs_path), tempSet=tempSet
