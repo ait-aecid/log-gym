@@ -1,3 +1,5 @@
+from utils import save_csv, load_csv
+
 from datetime import datetime
 
 import pandas as pd
@@ -23,9 +25,9 @@ class TemplateSet:
         return self._temp[idx]
 
     def save(self, path: str) -> None:
-        pd.DataFrame({
+        save_csv(path, data={
             "Template": self._temp.keys(), "Event ID": self._temp.values()
-        }).to_csv(path, index=False)
+        })
 
 
 class Dataset:
@@ -44,7 +46,7 @@ class Dataset:
         return self._dataset[idx]
 
     def save(self, path: str) -> None:
-        pd.DataFrame(self._dataset).to_csv(path, index=False)
+        save_csv(path, data=self._dataset)
 
 
 # %% Auxiliar methods
@@ -96,11 +98,11 @@ def process_all_tables(
     """
     tempSet = TemplateSet()
     for template_path in template_paths:
-        tempSet.add(pd.read_csv(template_path))
+        tempSet.add(load_csv(template_path))
     tempSet.save(f"{save_path}/template.csv")
     
     for structured_logs_path in structured_logs_paths:
         name = structured_logs_path.split("/")[-2]
         process_table(
-            pd.read_csv(structured_logs_path), tempSet=tempSet
+            load_csv(structured_logs_path), tempSet=tempSet
         ).save(f"{save_path}/{name}.csv")

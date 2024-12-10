@@ -1,7 +1,9 @@
+import pandas as pd
 import typing as t
 import yaml
 
 
+# %% Print formats
 class Color:
     @staticmethod
     def purple(msg: str) -> str:
@@ -24,11 +26,29 @@ class Color:
         return f"\033[91m{msg}\033[0m"
 
 
-def read_yaml_file(path: str): 
+# %% File methods
+def read_yaml_file(path: str) -> t.Dict[str, t.Any]: 
     with open(path) as file:
         return yaml.safe_load(file)
 
 
+def load_csv(path: str) -> pd.DataFrame:
+    return  pd.read_csv(path)
+
+
+@t.overload
+def save_csv(path: str, data: t.Dict[str, t.Any]) -> None: pass
+
+@t.overload
+def save_csv(path: str, data: pd.DataFrame) -> None: pass
+
+def save_csv(path, data):
+    if not isinstance(data, pd.DataFrame):
+        data = pd.DataFrame(data)
+    data.to_csv(path, index=False)
+
+
+# %% Config file methods
 class Config:
     def __init__(
         self,

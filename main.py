@@ -3,7 +3,7 @@ from backbone.parser import Parser
 import backbone.logs as logs
 
 from simulations import challenges
-from utils import Color, Config 
+from utils import Color, Config , save_csv
 
 import argparse
 import os
@@ -50,14 +50,15 @@ if __name__ == "__main__":
         parser = Parser.from_file(msg_path, version=sim_config["Version"])
         results = parser.load_logs(logs.path_logs)
 
-        results["Templates"].to_csv(
-            path_t := sim_config["Results"]["templates_path"], index=False
+        save_csv(
+            results["Templates"], path_t := sim_config["Results"]["templates_path"]
         )
         templates_paths.append(path_t)
         print(f"{Color.blue('Templates saved in')} {path_t}")
 
-        results["Structured logs"].to_csv(
-            path_s := sim_config["Results"]["structured_logs_path"], index=False
+        save_csv(
+            results["Structured logs"], 
+            path_s := sim_config["Results"]["structured_logs_path"]
         )
         structured_logs_paths.append(path_s)
         print(f"{Color.blue('Structured logs saved in')} {path_s}")
