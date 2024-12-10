@@ -1,4 +1,4 @@
-from dataset_generator import process_all_tables
+from backbone.dataset_generator import process_all_tables
 from backbone.parser import Parser
 import backbone.logs as logs
 
