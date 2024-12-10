@@ -1,3 +1,4 @@
+from dataset_generator import process_all_tables
 from backbone.parser import Parser
 import backbone.logs as logs
 
@@ -23,9 +24,10 @@ parser.add_argument(
 if __name__ == "__main__":
     args = parser.parse_args()
     config = Config(args.config_file)
-    simulation_type, case = config.get_parameters()
+    simulation_type, case, db_path = config.get_parameters()
 
     print(Color.yellow(f"Doing {simulation_type}")) 
+    structured_logs_paths, templates_paths = [], []
     for simulation in config.simulations():
         
         sim_config = config[simulation]
@@ -51,9 +53,18 @@ if __name__ == "__main__":
         results["Templates"].to_csv(
             path_t := sim_config["Results"]["templates_path"], index=False
         )
+        templates_paths.append(path_t)
         print(f"{Color.blue('Templates saved in')} {path_t}")
 
         results["Structured logs"].to_csv(
             path_s := sim_config["Results"]["structured_logs_path"], index=False
         )
+        structured_logs_paths.append(path_s)
         print(f"{Color.blue('Structured logs saved in')} {path_s}")
+
+    create_folder(db_path)
+    process_all_tables(
+        structured_logs_paths=structured_logs_paths,
+        template_paths=templates_paths,
+        save_path=db_path
+    )

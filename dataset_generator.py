@@ -3,7 +3,7 @@ from datetime import datetime
 import pandas as pd
 import typing as t
 
-
+# %% Data structures
 class TemplateSet:
     def __init__(self) -> None:
         self._temp = {}
@@ -22,8 +22,10 @@ class TemplateSet:
     def __getitem__(self, idx: str) -> int:
         return self._temp[idx]
 
-    def save(path: str) -> None:
-        pass
+    def save(self, path: str) -> None:
+        pd.DataFrame({
+            "Template": self._temp.keys(), "Event ID": self._temp.values()
+        }).to_csv(path, index=False)
 
 
 class Dataset:
@@ -41,10 +43,11 @@ class Dataset:
     def __getitem__(self, idx: str) -> t.List[t.Any]:
         return self._dataset[idx]
 
-    def save(path: str) -> None:
-        pass
+    def save(self, path: str) -> None:
+        pd.DataFrame(self._dataset).to_csv(path, index=False)
 
 
+# %% Auxiliar methods
 def split_in_process(structured_logs: pd.DataFrame) -> t.Iterable[pd.DataFrame]:
     idx = [i for i, info in enumerate(structured_logs["Level"]) if info == "TRACE"]
     idx = [(idx[i], idx[i+1]) for i in range(0, len(idx), 2)]
@@ -82,3 +85,22 @@ def process_table(
         )
 
     return dataset
+
+
+# %% Main method
+def process_all_tables(
+    structured_logs_paths: t.List[str], template_paths: t.List[str], save_path: str,
+) -> None:
+    """
+    Process all the tables so they can be use in training
+    """
+    tempSet = TemplateSet()
+    for template_path in template_paths:
+        tempSet.add(pd.read_csv(template_path))
+    tempSet.save(f"{save_path}/template.csv")
+    
+    for structured_logs_path in structured_logs_paths:
+        name = structured_logs_path.split("/")[-2]
+        process_table(
+            pd.read_csv(structured_logs_path), tempSet=tempSet
+        ).save(f"{save_path}/{name}.csv")

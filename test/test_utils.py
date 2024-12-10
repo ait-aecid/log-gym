@@ -9,6 +9,7 @@ def read_config(path):
         "General": {
             "Simulation": "simulation",
             "Case": "case_2",
+            "Save_path": "Hello",
         },
         "Train": {"hello": "world"},
         "Test_1": {"ciao": "bella"},
@@ -22,7 +23,7 @@ class ConfigTestCase(unittest.TestCase):
 
     def test_get_params(self) -> None:
         self.assertTupleEqual(
-            self.config.get_parameters(), ("simulation", "case_2")
+            self.config.get_parameters(), ("simulation", "case_2", "Hello")
         )
 
     def test_simulations(self) -> None:

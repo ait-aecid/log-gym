@@ -79,7 +79,7 @@ third_expected = {
 
 path_logs = "test/logs_tests/structured_logs.csv"
 
-
+ 
 class DataGeneratorTestCase(unittest.TestCase):
     def test_split_process(self) -> None:
         gen = dg.split_in_process(pd.read_csv(path_logs))

@@ -37,10 +37,11 @@ class Config:
     ) -> None:
         self.__config = read_file(path)
 
-    def get_parameters(self) -> t.Tuple[str, str]:
+    def get_parameters(self) -> t.Tuple[str, str, str]:
         return (
             self.__config["General"]["Simulation"],
-            self.__config["General"]["Case"]
+            self.__config["General"]["Case"],
+            self.__config["General"]["Save_path"]
         )
     
     def simulations(self) -> t.List[str]:
