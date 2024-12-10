@@ -2,6 +2,7 @@
 General:
     Simulation: Loading_dependencies
     Case: case_1
+    Save_path: results/db/
 
 Train:
     Version: 1
