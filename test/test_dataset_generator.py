@@ -81,7 +81,7 @@ path_logs = "test/logs_tests/structured_logs.csv"
 
 
 class DataGeneratorTestCase(unittest.TestCase):
-    def test_split_process(self):
+    def test_split_process(self) -> None:
         gen = dg.split_in_process(pd.read_csv(path_logs))
         expected = [first_expected, second_expected, third_expected]
         for z, table in enumerate(gen):
@@ -90,11 +90,39 @@ class DataGeneratorTestCase(unittest.TestCase):
                 self.assertListEqual(expected[z][k], table_[k])
         self.assertEqual(2, z)
 
+    def test_time_diff(self) -> None:
+        date = ["2024-12-09", "2024-12-09", "2024-12-10"]
+        time = ["13:28:27", "13:28:29", "13:28:29"]
+        result = dg.get_time_diff(dates=date, times=time)
+
+        self.assertListEqual([2, 86400], result)
+
     def test_process_table(self) -> None:
         tempSet = dg.TemplateSet()
+        tempSet.add(
+            pd.DataFrame({
+                "Template": ["Trying again later", "Resource ready"], 
+                "Event ID": [0, 1]
+            })
+        )
         dataset = dg.process_table(pd.read_csv(path_logs), tempSet=tempSet)
 
         self.assertListEqual(
             [["INFO", "INFO"], ["INFO"], ["INFO", "INFO"]], dataset["Level"]
         )
-        # TODO: do timestamps, templates, message, event ID
+        self.assertListEqual(
+            [
+                ["Trying again later", "Resource ready"],
+                ["Resource ready"], 
+                ["Trying again later", "Resource ready"]
+            ], dataset["Content"]
+        )
+        self.assertListEqual(
+            [
+                ["Trying again later", "Resource ready"],
+                ["Resource ready"], 
+                ["Trying again later", "Resource ready"]
+            ], dataset["Template"]
+        )
+        self.assertListEqual([[0, 1], [1], [0, 1]], dataset["Event ID"])
+        self.assertListEqual([[1.], [], [1.]], dataset["Time Diff"])
