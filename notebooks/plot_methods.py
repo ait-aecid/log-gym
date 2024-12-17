@@ -5,6 +5,22 @@ import pandas as pd
 import numpy as np
 import math
 
+
+# %% General stats
+
+def datasets_stats(tables):
+    general_table = {"Name": [], "Size": []}
+    for name, path in tables.items():
+        general_table["Name"].append(name)
+        general_table["Size"].append(len(pd.read_csv(path)))
+
+    return pd.DataFrame(general_table)
+
+
+def load_template(template_path):
+    return pd.read_csv(template_path)
+
+
 # %% Event statistics
 
 def get_length_dist(df):
