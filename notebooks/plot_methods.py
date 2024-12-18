@@ -57,28 +57,38 @@ def get_unique_elements(df):
     return values, heights
 
 
-def plot_events(tables):
-    fig, axs = plt.subplots(1, 2, figsize=(14, 5))
-    fig.suptitle("Event statistics", fontsize=20)
+def plot_events_length(tables):
+    fig, axs = plt.subplots(1, figsize=(10, 5))
+    fig.suptitle("Event sequence length", fontsize=20)
 
     for label, path in tables.items():
         df = pd.read_csv(path)
 
         values_length, heights_length = get_length_dist(df)
-        axs[0].bar(values_length, heights_length, alpha=0.4)
-        axs[0].plot(values_length, heights_length, label=label)
+        axs.bar(values_length, heights_length, alpha=0.4)
+        axs.plot(values_length, heights_length, label=label)
 
+    axs.grid()
+    axs.legend()
+
+    axs.set_xlabel("Length event sequence", fontsize=14)
+    axs.set_ylabel("Amount of event sequences", fontsize=14)
+
+
+def plot_unique_events(tables):
+    rows = math.ceil(len(tables) / 2)
+    fig, axs = plt.subplots(rows, 2, figsize=(14, 10))
+    fig.suptitle("Event ID distribution", fontsize=20)
+
+    for i, (name, path) in enumerate(tables.items()):
+        row = math.floor(i / rows)
+        column = i % rows
+        axs[row, column].set_title(name, fontsize=18)
+    
+        df = pd.read_csv(path)
         values_unique, heights_unique = get_unique_elements(df)
-        axs[1].bar(values_unique.astype(str), heights_unique, alpha=0.4)
 
-    axs[0].grid(), axs[1].grid()
-    axs[0].legend()
-
-    axs[0].set_xlabel("Length event sequence", fontsize=14)
-    axs[0].set_ylabel("Amount of event sequences", fontsize=14)
-    axs[1].set_xlabel("Unique events", fontsize=14)
-    axs[1].set_ylabel("Amount of events", fontsize=14)
-
+        axs[row, column].pie(heights_unique, labels=values_unique, autopct="%1.1f%%")
 
 # %% Time difference
 
