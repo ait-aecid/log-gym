@@ -1,4 +1,7 @@
 
+
+from sentence_transformers import SentenceTransformer
+from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt 
 import networkx as nx
 import pandas as pd 
@@ -159,6 +162,60 @@ def plot_level_dist(tables):
         column = i % rows
         axs[row, column].set_title(name, fontsize=18)
         plot_pie(df=pd.read_csv(path), ax=axs[row, column])
+
+# %% Templates analysis
+
+def get_msgs(type_, tables, col_name):
+    _set = set()
+    for name in [name for name in tables.keys() if type_ in name]:
+        templates_ = pd.read_csv(tables[name])[col_name].apply(lambda x: eval(x))
+        for templates in templates_:
+            for template in templates:
+                _set.add(template)
+
+    return _set
+
+others_list = [
+    "The weather is lovely today.",
+    "He drove to the stadium.",
+    "The mathematical equation is equal to 0",
+    "Hello, how are you doing?",
+    "Did you liked the new movie?",
+    "The diagnose is incomplete, a CT scan is need it"
+]
+
+def plot_embeddings(tables, col_name):
+    model = SentenceTransformer("all-mpnet-base-v2")
+    normal_set = get_msgs("Normal", tables, col_name)
+    abnormal_set = get_msgs("Abnormal", tables, col_name)
+
+    embeddings_normal = list(model.encode(list(normal_set - abnormal_set)))
+    embeddings_abnormal = list(model.encode(list(abnormal_set - normal_set)))
+    embeddings_all = list(model.encode(list(normal_set.union(abnormal_set))))
+    embeddings_others = list(model.encode(others_list))
+
+    pca = PCA(n_components=2).fit(embeddings_all + embeddings_others)
+
+    plt.figure(figsize=(10, 5))
+    all_pca = pca.transform(embeddings_all)
+    plt.scatter(all_pca[:, 0], all_pca[:, 1], label="Common", color="green")
+    if len(embeddings_normal) > 0:
+        normal_pca = pca.transform(embeddings_normal)
+        plt.scatter(
+            normal_pca[:, 0], normal_pca[:, 1], label="Only normal", color="blue"
+        )
+    if len(embeddings_abnormal) > 0:
+        abnormal_pca = pca.transform(embeddings_abnormal)
+        plt.scatter(
+            abnormal_pca[:, 0], abnormal_pca[:, 1], label="Only abnormal", color="purple"
+        )
+    others_pca = pca.transform(embeddings_others)
+    plt.scatter(others_pca[:, 0], others_pca[:, 1], label="Others", color="gray")
+    plt.grid(), plt.legend()
+
+    plt.title("PCA Dimension reduction", fontsize=20)
+    plt.xlabel("Dimension 1 reduction", fontsize=18)
+    plt.ylabel("Dimension 2 reduction", fontsize=18)
 
 
 # %% Execturion plot graph
