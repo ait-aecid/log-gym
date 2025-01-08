@@ -1,7 +1,7 @@
 
 General:
     Simulation: Resource_challenge
-    Case: case_3
+    Case: case_2
     Save_path: results/db/
 
 Train:

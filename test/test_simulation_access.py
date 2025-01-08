@@ -30,6 +30,17 @@ class ProcessTestCase(unittest.TestCase):
 
             self.assertTrue(value_1 > value_2)
 
+    def test_nominals_maller_max_iter(self):
+        config = ConfigResource()
+        config.max_iter = 10
+        config.p_normal = [1., 0.]
+        
+        resource = Resource(config=config)
+        for i in range(config.max_iter + 2):
+            if resource.init(i):
+                break
+        self.assertEqual(config.max_iter, i)   
+
     def test_case1_nominal(self):
         import backbone.logs as logs 
         logs.store_logs = False
