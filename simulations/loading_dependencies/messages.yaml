@@ -11,8 +11,8 @@ start_process:
     v1_template: Dependency library has<*>
 
 load_a:
-    v1: Dependency a is loading
-    v1_template: Dependency a is<*>
+    v1: Dependency a is loading now
+    v1_template: Dependency a is<*>now
 
 load_a_fail:
     v1: Dependency a failed to load
@@ -23,24 +23,24 @@ load_a_done:
     v1_template: Dependency a is<*>
 
 load_b:
-    v1: Dependency b is loading
-    v1_template: Dependency b is<*>
+    v1: Dependency b is loading now
+    v1_template: Dependency b is<*>now
 
 load_b_done:
     v1: Dependency b is ready
     v1_template: Dependency b is<*>
 
 load_c:
-    v1: Dependency c is loading
-    v1_template: Dependency c is<*>
+    v1: Dependency c is loading now
+    v1_template: Dependency c is<*>now
 
 load_c_done:
     v1: Dependency c is ready
     v1_template: Dependency c is<*>
 
 load_d:
-    v1: Dependency d is loading
-    v1_template: Dependency d is<*>
+    v1: Dependency d is loading now
+    v1_template: Dependency d is<*>now
 
 load_d_done:
     v1: Dependency d is ready
