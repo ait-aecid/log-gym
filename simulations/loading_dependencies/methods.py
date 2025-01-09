@@ -17,6 +17,7 @@ def code_structure(dependencies: Dependencies, msg: Messages) -> None:
     logs.info(msg.start_process)
     
     logs.info(msg.load_a)
+    logs.info(msg.load_a_hold)
     dependencies.load_a()
     if condition():
         logs.error(msg.load_a_fail)
