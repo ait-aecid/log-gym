@@ -29,20 +29,20 @@ load_a_hold:
 load_a_fail:
     v1: Dependency a failed to load
     v1_template: Dependency<*>failed to load
-    v2: Dependency a failed to load
-    v2_template: Dependency<*>failed to load
+    v2: Dependency a failed to load.
+    v2_template: Dependency<*>failed to load.
 
 load_a_done:
     v1: Dependency a is ready
     v1_template: Dependency a is<*>
-    v2: Dependency a is ready
-    v2_template: Dependency a is<*>
+    v2: Dependency a is ready.
+    v2_template: Dependency a is<*>.
 
 load_b:
     v1: Dependency b is loading now
     v1_template: Dependency b is<*>now
-    v2: Dependency b is loading now
-    v2_template: Dependency b is<*>now
+    v2: Dependency b is loading now.
+    v2_template: Dependency b is<*>now.
 
 load_b_done:
     v1: Dependency b is ready
@@ -53,8 +53,8 @@ load_b_done:
 load_c:
     v1: Dependency c is loading now
     v1_template: Dependency c is<*>now
-    v2: Dependency c is loading now
-    v2_template: Dependency c is<*>now
+    v2: Dependency c is loading now.
+    v2_template: Dependency c is<*>now.
 
 load_c_done:
     v1: Dependency c is ready
@@ -65,8 +65,8 @@ load_c_done:
 load_d:
     v1: Dependency d is loading now
     v1_template: Dependency d is<*>now
-    v2: Dependency d is loading now
-    v2_template: Dependency d is<*>now
+    v2: Dependency d is loading now.
+    v2_template: Dependency d is<*>now.
 
 load_d_done:
     v1: Dependency d is ready
