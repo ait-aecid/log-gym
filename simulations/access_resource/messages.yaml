@@ -22,9 +22,9 @@ not_able_access:
     v2_template: "Not able to access:<*>"
 
 errors_found_false:
-    v1: "Errors found False"
+    v1: "Errors found ['Exception something unexpected has happen, please reboot']"
     v1_template: "Errors found<*>"
-    v2: "Errors found False"
+    v2: "Errors found ['Exception something unexpected has happen, please reboot']"
     v2_template: "Errors found<*>"
 
 errors_found_true:
