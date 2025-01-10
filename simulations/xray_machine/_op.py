@@ -44,4 +44,4 @@ def condition() -> bool:
 
 
 def pick_num() -> int:
-    return int(np.random.choice(range(6), size=1))
+    return int(np.random.choice(range(1, 6), size=1))
