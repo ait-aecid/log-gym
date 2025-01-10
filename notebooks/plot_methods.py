@@ -218,7 +218,7 @@ def plot_embeddings(tables, col_name):
     plt.ylabel("Dimension 2 reduction", fontsize=18)
 
 
-# %% Execturion plot graph
+# %% Execturtion plot graph
  
 def plot_execution_graph(tables):
     for i, (name, path) in enumerate(tables.items()):
@@ -233,3 +233,53 @@ def plot_execution_graph(tables):
         plt.figure(i, figsize=(20, 5))
         plt.title(name, fontsize=18)
         nx.draw(G, with_labels = True)
+
+
+# %% Vector count plot
+
+def get_vectors(table):
+    seq_events = table["Event ID"].apply(lambda x: eval(x)).tolist()
+
+    unique_ = set()
+    for seq in seq_events:
+        for event in seq:
+            if event not in unique_:
+                unique_.add(event) 
+    unique_ = list(unique_)
+
+    vectors = np.zeros((len(unique_), len(unique_)))
+    for seq in seq_events:
+        unique_values, counts = np.unique(seq, return_counts=True)
+        for uniq_event in unique_:
+            if uniq_event in unique_values:
+                for value, count in zip(unique_values, counts):
+                    vectors[unique_.index(uniq_event), unique_.index(value)] += count
+
+    vectors = vectors / np.sum(vectors, axis=1)         
+    return vectors, unique_
+
+
+def do_count_plot(table, ax, fig):
+    vectors, unique_ = get_vectors(table)
+    
+    cax = ax.imshow(vectors, vmin=0, vmax=1)
+    ax.set_xticks(range(vectors.shape[0]), unique_)
+    ax.set_yticks(range(vectors.shape[1]), unique_)
+    fig.colorbar(cax, ax=ax)
+    
+    
+def plot_count_vectors(tables):
+    rows = math.ceil(len(tables) / 2)
+    fig, axs = plt.subplots(rows, 2, figsize=(14, 10))
+
+    for i, (name, path) in enumerate(tables.items()):
+        row = math.floor(i / rows)
+        column = i % rows
+        axs[row, column].set_title(name, fontsize=18)
+        
+        if column == 0:
+            axs[row, column].set_ylabel("Log event count", fontsize=18)
+        if row == rows - 1:
+            axs[row, column].set_xlabel("Log event count", fontsize=18)
+
+        do_count_plot(table=pd.read_csv(path), ax=axs[row, column], fig=fig)
