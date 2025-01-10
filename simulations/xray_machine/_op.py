@@ -2,6 +2,8 @@
 
 import time
 
+import numpy as np
+
 
 class ConfigXRay:
     do_anomaly = False
@@ -35,3 +37,11 @@ class XRay:
     def do_measure(self) -> None:
         if not self.is_test:
             time.sleep(self.wait_time.meas)
+
+
+def condition() -> bool:
+    return bool(np.random.choice([0., 1], p=[0.75, 0.25], size=1))
+
+
+def pick_num() -> int:
+    return int(np.random.choice(range(6), size=1))
