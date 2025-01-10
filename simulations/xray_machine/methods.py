@@ -54,6 +54,30 @@ def case_1_xray_simple(
             xray.do_measure()
         
 
+def case_2_xray_combine_ver_meas(
+    do_anomaly: bool, msg: Messages, is_test: bool = False
+) -> None:
+    """
+    The machine has to run verification before running a measurement
+    """
+    config = _op.ConfigXRay()
+    config.do_anomaly = do_anomaly
+    config.is_test = is_test
 
+    logs.info(msg.initialize_machine)
+    logs.info(msg.setting_up)
 
+    xray = _op.XRay(config=config) 
+    logs.info(msg.machine_ready)
+    
+    xray.verification_mode(True)
+    if xray.is_verification():
+        logs.warning(msg.running_as_verification)
+        for _ in range(pick_num()):
+            logs.info(msg.running)
+            xray.do_verification()
 
+    logs.warning(msg.running_as_measurement)
+    for _ in range(pick_num()):
+        logs.info(msg.running)
+        xray.do_measure()

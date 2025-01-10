@@ -71,3 +71,45 @@ class CasesXrayTestCase(unittest.TestCase):
 
             self.assertTrue(ver_mode and meas_mode)
         
+    def test_case_2_nominal(self) -> None: 
+        import backbone.logs as logs 
+        logs.store_logs = False
+        logs.as_test()
+        msg = methods.Messages.from_file(path_msg)
+
+        for _ in range(20):
+            methods.case_2_xray_combine_ver_meas(
+                do_anomaly=False, msg=msg, is_test=True
+            ) 
+            logs_list = logs.history.copy() 
+            logs.history = []
+            meas_mode, ver_mode = False, False
+            for log in logs_list:
+                if "measurement" in log.lower():
+                    meas_mode = True
+                if "verification" in log.lower():
+                    ver_mode = True
+
+            self.assertTrue(ver_mode and meas_mode)
+
+    def test_case_2_anominal(self) -> None: 
+        import backbone.logs as logs 
+        logs.store_logs = False
+        logs.as_test()
+        msg = methods.Messages.from_file(path_msg)
+
+        for _ in range(20):
+            methods.case_2_xray_combine_ver_meas(
+                do_anomaly=True, msg=msg, is_test=True
+            ) 
+            logs_list = logs.history.copy() 
+            logs.history = []
+            meas_mode, ver_mode = False, False
+            for log in logs_list:
+                if "measurement" in log.lower():
+                    meas_mode = True
+                if "verification" in log.lower():
+                    ver_mode = True
+
+            self.assertTrue(meas_mode)
+            self.assertFalse(ver_mode)
