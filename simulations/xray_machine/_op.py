@@ -10,8 +10,8 @@ class ConfigXRay:
     is_test = False
 
     class WaitTime:
-        verif = 0.5
-        meas = 2
+        verif = 0.05
+        meas = 0.2
 
     def __init__(self):
         self.wait_time = ConfigXRay.WaitTime()

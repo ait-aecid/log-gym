@@ -1,0 +1,61 @@
+
+
+General:
+    Simulation: XRay_machine
+    Case: case_1
+    Save_path: results/db/
+
+Train:
+    Version: 1
+    As_anomaly: False
+    store_logs: True
+    Number_simulations: 10
+    
+    Results:
+        path_logs: results/train/simulation_logs_anomaly.log
+        templates_path: results/train/template.csv
+        structured_logs_path: results/train/structured_logs.csv
+
+Test_normal_v1:
+    Version: 1
+    As_anomaly: False
+    store_logs: True
+    Number_simulations: 10
+    
+    Results:
+        path_logs: results/test_normal_v1/simulation_logs_anomaly.log
+        templates_path: results/test_normal_v1/template.csv
+        structured_logs_path: results/test_normal_v1/structured_logs.csv
+
+Test_abnormal_v1:
+    Version: 1
+    As_anomaly: True
+    store_logs: True
+    Number_simulations: 10
+    
+    Results:
+        path_logs: results/test_abnormal_v1/simulation_logs_anomaly.log
+        templates_path: results/test_abnormal_v1/template.csv
+        structured_logs_path: results/test_abnormal_v1/structured_logs.csv
+
+Test_normal_v2:
+    Version: 2
+    As_anomaly: False
+    store_logs: True
+    Number_simulations: 10
+    
+    Results:
+        path_logs: results/test_normal_v2/simulation_logs_anomaly.log
+        templates_path: results/test_normal_v2/template.csv
+        structured_logs_path: results/test_normal_v2/structured_logs.csv
+
+Test_abnormal_v2:
+    Version: 2
+    As_anomaly: True
+    store_logs: True
+    Number_simulations: 10
+    
+    Results:
+        path_logs: results/test_abnormal_v2/simulation_logs_anomaly.log
+        templates_path: results/test_abnormal_v2/template.csv
+        structured_logs_path: results/test_abnormal_v2/structured_logs.csv

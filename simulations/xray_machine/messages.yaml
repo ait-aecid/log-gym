@@ -1,3 +1,14 @@
+start_simulation:
+    v1: Start simulation
+    v1_template: <*>simulation
+    v2: Start simulation
+    v2_template: <*>simulation
+
+end_simulation:
+    v1: End simulation
+    v1_template: <*>simulation
+    v2: End simulation
+    v2_template: <*>simulation
 
 initialize_machine:
     v1: Machine XRay has been initialize.
