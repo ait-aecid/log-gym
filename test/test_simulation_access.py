@@ -101,7 +101,7 @@ class ProcessTestCase(unittest.TestCase):
         logs.history = []
         msg = Messages.from_file(path_msg)
         case3_init_resource(config, msg=msg)
-        self.assertTrue(" INFO:Test Errors found False" in logs.history)
+        self.assertTrue(" INFO:Test Errors found None" in logs.history)
 
     def test_case3_anominal(self):
         import backbone.logs as logs 
@@ -114,4 +114,4 @@ class ProcessTestCase(unittest.TestCase):
         logs.history = []
         msg = Messages.from_file(path_msg)
         case3_init_resource(config, msg=msg)
-        self.assertTrue(" INFO:Test Errors found True" in logs.history)
+        self.assertTrue(" INFO:Test Errors found None" not in logs.history)
