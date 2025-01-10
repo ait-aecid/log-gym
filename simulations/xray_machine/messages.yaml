@@ -1,0 +1,52 @@
+
+initialize_machine:
+    v1: Machine XRay has been initialize.
+    v1_template: Machine<*>has been<*>.
+    v2: Machine XRay model 5 has been initialize.
+    v2_template: Machine<*>has been<*>.
+
+setting_up:
+    v2: Setting up...
+    v2_template: Setting up...
+
+machine_ready:
+    v1: Machine XRay is ready.
+    v1_template: Machine<*>is ready.
+    v2: Machine XRay model 5 is ready.
+    v2_template: Machine<*>is ready.
+
+verification_mode:
+    v1: Machine in verification mode.
+    v1_template: Machine in verification mode.
+    v2: Machine in verification mode.
+    v2_template: Machine in<*>mode.
+
+measurement_mode:
+    v1: Machine in measurement mode.
+    v1_template: Machine in measurement mode.
+    v2: Machine in measurement mode.
+    v2_template: Machine in<*>mode.
+
+loading:
+    v1: Loading...
+    v1_template: Loading...
+    v2: Loading...
+    v2_template: Loading...
+
+running_as_verification:
+    v1: Running in verification mode.
+    v1_template: Running in verification mode.
+    v2: Running in verification mode.
+    v2_template: Running in<*>mode.
+
+running_as_measurement:
+    v1: Running in measurement mode.
+    v1_template: Running in measurement mode.
+    v2: Running in measurement mode.
+    v2_template: Running in<*>mode.
+
+running:
+    v1: Running...
+    v1_template: Running...
+    v2: Running...
+    v2_template: Running...
