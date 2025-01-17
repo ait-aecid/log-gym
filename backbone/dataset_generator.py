@@ -86,6 +86,8 @@ def process_table(
         dataset["Time Diff"] = get_time_diff(
             dates=table["Date"].to_list(), times=table["Time"].to_list()
         )
+        if "Client" in table:
+            dataset["Client"] = table["Client"].to_list()
 
     return dataset
 
