@@ -91,3 +91,15 @@ class SenderTestCase(unittest.TestCase):
         self.assertListEqual(
             [" INFO:Test Waiting..." for _ in range(10)], logs.history
         )
+
+class AdminAcessTestCase(unittest.TestCase):
+    def test_is_anomaly(self):
+        for i in range(10):
+            self.assertTrue(methods.is_admin(do_anomaly=True, client_n=i))
+
+    def test_is_nominal(self):
+        for i in range(10):
+            if i == 0:
+                self.assertTrue(methods.is_admin(do_anomaly=False, client_n=i))
+            else:
+                self.assertFalse(methods.is_admin(do_anomaly=False, client_n=i))

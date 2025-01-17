@@ -2,7 +2,7 @@
 
 General:
     Simulation: Collaborative_setup
-    Case: case_1
+    Case: case_2
     Save_path: results/db/
 
 Train:

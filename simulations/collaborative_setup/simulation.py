@@ -15,6 +15,7 @@ class CollaborativeSetup(ISimulation):
         super().__init__(
             cases={
                 "case_1": methods.case_1_wrong_template,
+                "case_2": methods.case_2_infected_client,
             }, 
             msg_path="simulations/collaborative_setup/messages.yaml",
             multiple_clients=3,

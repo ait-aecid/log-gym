@@ -31,7 +31,6 @@ class Sender:
             logs.info(self.msg[f"template_{self.template}_send_file"])
         
 
-
 def case_1_wrong_template(do_anomaly: bool, msg: Messages, client_n: int) -> None:
     """
     One of the clients creates a wrong template in the parsing
@@ -44,3 +43,23 @@ def case_1_wrong_template(do_anomaly: bool, msg: Messages, client_n: int) -> Non
         while next(wait_process): pass
         sender.send_package()
     
+
+def is_admin(do_anomaly: bool, client_n: int) -> bool:
+    return do_anomaly or client_n == 0
+
+
+def case_2_infected_client(do_anomaly: bool, msg: Messages, client_n: int) -> None:
+    """
+    Infected clients access as admins and remove users.
+    """
+    logs.info(msg.starting_process)
+    if is_admin(do_anomaly=do_anomaly, client_n=client_n):
+        logs.info(msg.admin_remove_jeff)
+        logs.info(msg.admin_remove_thomas)
+        logs.info(msg.admin_remove_john)
+    else:
+        for _ in range(3):
+            for _ in range(4):
+                logs.info(msg.waiting)
+                time.sleep(0.05)
+            logs.info(msg.doing_process)

@@ -13,14 +13,14 @@ end_simulation:
 prepared_to_send:
     v1: Prepare to send package
     v1_template: Prepare to send package
-    v2: Prepare to send package
-    v2_template: Prepare to send package
+    v2: Prepare to send package.
+    v2_template: Prepare to send package.
 
 waiting:
     v1: Waiting...
     v1_template: Waiting...
-    v2: Waiting...
-    v2_template: Waiting...
+    v2: Waiting to send...
+    v2_template: Waiting to send...
 
 template_1_send_file:
     v1: <*template_1*>Sending file with package 1
@@ -45,3 +45,33 @@ template_2_error:
     v1_template: Send file with package<*>Failed
     v2: <*template_2*>Sending file with package 1 Failed
     v2_template: Send file with package<*>Failed
+
+starting_process:
+    v1: Starting process
+    v1_template: Starting process
+    v2: Starting process
+    v2_template: Starting process
+
+admin_remove_jeff:
+    v1: Admin removed Jeff
+    v1_template: Admin removed<*>
+    v2: Admin removed Jeff
+    v2_template: Admin removed<*>
+
+admin_remove_thomas:
+    v1: Admin removed Thomas
+    v1_template: Admin removed<*>
+    v2: Admin removed Thomas
+    v2_template: Admin removed<*>
+
+admin_remove_john:
+    v1: Admin removed John
+    v1_template: Admin removed<*>
+    v2: Admin removed John
+    v2_template: Admin removed<*>
+
+doing_process:
+    v1: Doing process
+    v1_template: Doing process
+    v2: Doing process
+    v2_template: Doing process
