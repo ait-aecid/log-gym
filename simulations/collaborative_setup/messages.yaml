@@ -10,8 +10,38 @@ end_simulation:
     v2: End simulation
     v2_template: <*>simulation
 
-test_simulation:
-    v1: This is a test
-    v1_template: This is a test
-    v2: Test v2
-    v2_template: Test v2
+prepared_to_send:
+    v1: Prepare to send package
+    v1_template: Prepare to send package
+    v2: Prepare to send package
+    v2_template: Prepare to send package
+
+waiting:
+    v1: Waiting...
+    v1_template: Waiting...
+    v2: Waiting...
+    v2_template: Waiting...
+
+template_1_send_file:
+    v1: <*template_1*>Sending file with package 1
+    v1_template: Send file with<*>
+    v2: <*template_1*>Sending file with package 1
+    v2_template: Send file with<*>
+
+template_2_send_file:
+    v1: <*template_2*>Sending file with package 1
+    v1_template: Send file with package<*>
+    v2: <*template_2*>Sending file with package 1
+    v2_template: Send file with package<*>
+
+template_1_error:
+    v1: <*template_1*>Sending file with package 1 Failed
+    v1_template: Send file with package<*>
+    v2: <*template_1*>Sending file with package 1 Failed
+    v2_template: Send file with package<*>
+
+template_2_error:
+    v1: <*template_2*>Sending file with package 1 Failed
+    v1_template: Send file with package<*>Failed
+    v2: <*template_2*>Sending file with package 1 Failed
+    v2_template: Send file with package<*>Failed
