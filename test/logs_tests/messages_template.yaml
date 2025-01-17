@@ -1,0 +1,8 @@
+
+template_1_msg:
+  v1: <*template_1*>hello there
+  v1_template: <*>there
+
+template_2_msg:
+  v1: <*template_2*>hello there
+  v1_template: hello<*>

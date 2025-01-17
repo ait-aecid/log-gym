@@ -70,7 +70,7 @@ class ParserMethods:
         
         temp_df = templates.as_dataframe()
         templates_logs, event_ids = [], []
-        for log in structured_logs["Content"]:
+        for i, log in enumerate(structured_logs["Content"]):
             found_it = False
             for name, msg in list_msgs.items():
                 if log == msg:
@@ -78,6 +78,8 @@ class ParserMethods:
                     idx = temp_df["Template"] == templates_logs[-1]
                     event_ids.append(temp_df["Event ID"][idx].iloc[0])
                     found_it = True
+                    if "<*template_" in log:
+                        structured_logs["Content"][i] = ">".join(log.split(">")[1:])
                     break
             assert found_it, f"({log}) was not found"
 

@@ -11,6 +11,13 @@ logs = [
 ]
 
 
+logs_templates = [
+    "INFO:root:[2024-10-28/11:49:32] INFO:Standard <*template_1*>hello there",
+    "INFO:root:[2024-10-28/11:49:32] INFO:Standard <*template_2*>hello there",
+    "INFO:root:[2024-10-28/11:49:32] INFO:Standard <*template_1*>hello there",
+]
+
+
 structured_logs = {
     "Level": ["INFO", "TRACE", "TRACE"],
     "Module": ["Standard", "Standard", "Standard"],
@@ -50,7 +57,27 @@ structured_logs_output = {
 }
 
 
-logs_cients = [
+structured_logs_templates_output = {
+    "Level": ["INFO", "INFO", "INFO"],
+    "Module": ["Standard", "Standard", "Standard"],
+    "Date": ["2024-10-28", "2024-10-28", "2024-10-28"],
+    "Time": ["11:49:32", "11:49:32", "11:49:32"],
+    "Content": [
+        "hello there",
+        "hello there",
+        "hello there"
+    ],
+    "Template": [
+        "<*>there",
+        "hello<*>",
+        "<*>there" 
+    ],
+    "Event ID": [0, 1],
+    "Variables": [["hello"], ["there"], ["hello"]]
+}
+
+
+logs_clients = [
     "INFO:root:[2024-10-28/11:49:32] INFO:Standard <*Client_1*>Resource ready",
     "INFO:root:[2024-10-28/11:49:32] TRACE:Standard <*Client_2*>Process has ended",
     "INFO:root:[2024-10-28/11:49:32] TRACE:Standard <*Client_1*>Process has started ok",
@@ -74,7 +101,7 @@ class ParserMethodsTestCase(unittest.TestCase):
         self.assertDictEqual(structured_logs, expected)
 
     def test_unformat_logs_with_clients(self) -> None:
-        structured_logs = ParserMethods.structure_logs(logs_cients)
+        structured_logs = ParserMethods.structure_logs(logs_clients)
         expected = {
             "Level": ["INFO", "TRACE", "TRACE"],
             "Client": [1, 2, 1],
@@ -120,6 +147,24 @@ class ParserTestcase(unittest.TestCase):
             set(expected["Template"]), set(templates["Template"].tolist())
         )
 
+    def test_log_parser_templates_multiple(self) -> None:
+        parser = Parser.from_file("test/logs_tests/messages_template.yaml") 
+        templates = parser(logs_templates)["Templates"]
+        expected = {
+            "Event ID": [0, 1] ,
+            "Template":[      
+                "<*>there",
+                "hello<*>",
+            ]
+        }
+
+        self.assertSetEqual(
+            set(expected["Event ID"]), set(templates["Event ID"].tolist())
+        )
+        self.assertSetEqual(
+            set(expected["Template"]), set(templates["Template"].tolist())
+        )
+
     def test_log_parser_structured_logs(self) -> None:
         parser = Parser.from_file("test/logs_tests/messages.yaml") 
         structured_logs_ = parser(logs)["Structured logs"]
@@ -135,7 +180,7 @@ class ParserTestcase(unittest.TestCase):
 
     def test_log_parser_structured_logs_clients(self) -> None:
         parser = Parser.from_file("test/logs_tests/messages.yaml") 
-        structured_logs_ = parser(logs_cients)["Structured logs"]
+        structured_logs_ = parser(logs_clients)["Structured logs"]
         result = structured_logs_.to_dict("list")
 
         self.assertSetEqual(
@@ -146,6 +191,26 @@ class ParserTestcase(unittest.TestCase):
         del expected["Event ID"]
         del result["Event ID"]
         self.assertDictEqual(result, expected)
+
+    def test_log_parser_templates_cmd_from_file(self) -> None:
+        parser = Parser.from_file("test/logs_tests/messages_template.yaml") 
+        templates = parser.load_logs(
+            "test/logs_tests/test_logs_templates.log"
+        )["Templates"]
+        expected = {
+            "Event ID": [0, 1] ,
+            "Template":[      
+                "<*>there",
+                "hello<*>",
+            ]
+        }
+
+        self.assertSetEqual(
+            set(expected["Event ID"]), set(templates["Event ID"].tolist())
+        )
+        self.assertSetEqual(
+            set(expected["Template"]), set(templates["Template"].tolist())
+        )
 
     def test_log_parser_templates_from_file(self) -> None:
         parser = Parser.from_file("test/logs_tests/messages.yaml") 
@@ -168,6 +233,36 @@ class ParserTestcase(unittest.TestCase):
             set(expected["Template"]), set(templates["Template"].tolist())
         )
 
+    def test_log_parser_structured_logs_from_file(self) -> None:
+        parser = Parser.from_file("test/logs_tests/messages.yaml") 
+        structured_logs_ = parser.load_logs(
+            "test/logs_tests/test_logs.log"
+        )["Structured logs"]
+        result = structured_logs_.to_dict("list")
+
+        self.assertSetEqual(
+            set(result["Event ID"]), set(structured_logs_output["Event ID"])
+        )
+        expected = structured_logs_output.copy()
+        del expected["Event ID"]
+        del result["Event ID"]
+        self.assertDictEqual(result, expected)
+
+    def test_log_parser_structured_logs_templates_from_file(self) -> None:
+        parser = Parser.from_file("test/logs_tests/messages_template.yaml") 
+        structured_logs_ = parser.load_logs(
+            "test/logs_tests/test_logs_templates.log"
+        )["Structured logs"]
+        result = structured_logs_.to_dict("list")
+
+        self.assertSetEqual(
+            set(result["Event ID"]), set(structured_logs_templates_output["Event ID"])
+        )
+        expected = structured_logs_templates_output.copy()
+        del expected["Event ID"]
+        del result["Event ID"]
+        self.assertDictEqual(result, expected)
+
     def test_log_parser_structured_logs_clients_from_file(self) -> None:
         parser = Parser.from_file("test/logs_tests/messages.yaml") 
         structured_logs_ = parser.load_logs(
@@ -183,3 +278,5 @@ class ParserTestcase(unittest.TestCase):
         del expected["Event ID"]
         del result["Event ID"]
         self.assertDictEqual(result, expected)
+
+
