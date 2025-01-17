@@ -24,6 +24,19 @@ def load_template(template_path):
     return pd.read_csv(template_path)
 
 
+def count_clients(path):
+    df = pd.read_csv(path)
+
+    if "Client" not in df.columns:
+        print("No clients in this dataset")
+    else:
+        stats = {}
+        for clients in df["Client"]:
+            client = eval(clients)[0]
+            stats[client] = stats.get(client, 0) + 1
+
+    return pd.DataFrame(stats.items(), columns=["Client", "Count"])
+
 # %% Event statistics
 
 def get_length_dist(df):
