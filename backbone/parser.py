@@ -91,12 +91,14 @@ class Parser(Messages):
     """
     Class use for the parsing of the logs
     """
-    def __init__(self, msgs: t.Dict[str, str], version: int = 1) -> None:
-        super().__init__(msgs, version)
+    def __init__(
+        self, msgs: t.Dict[str, str], version: int = 1, client_n: None = None
+    ) -> None:
+        super().__init__(msgs, version, client_n=client_n)
 
     @classmethod
     def from_file(cls, path_file: str, version: int = 1) -> t.Self:
-        return super().from_file(path_file, version)
+        return super().from_file(path_file, version, client_n=None)
  
     def __add_structured_logs(self, logs: t.List[str]) -> pd.DataFrame:
 

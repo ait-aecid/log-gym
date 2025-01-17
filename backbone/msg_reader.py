@@ -60,9 +60,11 @@ class Messages:
         self.__initialize(msgs=msgs)
 
     @classmethod
-    def from_file(cls, path_file: str, version: int = 1) -> object:
+    def from_file(
+        cls, path_file: str, version: int = 1, client_n: int | None = None
+    ) -> object:
         msgs = read_yaml_file(path_file)
-        return cls(msgs=msgs, version=version)
+        return cls(msgs=msgs, version=version, client_n=client_n)
 
     def __getitem__(self, msg_name: str) -> str:
         return self.list_msgs[msg_name]

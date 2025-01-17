@@ -74,6 +74,20 @@ class MessagesTestCase(unittest.TestCase):
         self.assertEqual("general <*>", msgs2.templates["message_2"])
         self.assertEqual("general <*>", msgs2.templates.message_2)
 
+    def test_from_file_with_prefix(self) -> None:
+        path = "test/logs_tests/msgs_test.yaml"
+        msgs1 = Messages.from_file(path, version=1, client_n=1)
+        msgs2 = Messages.from_file(path, version=2, client_n=3)
+
+        self.assertEqual(None, msgs1["message_2"])
+        self.assertEqual(None, msgs1.message_2)
+        self.assertEqual("<*Client_3*>general kenobi", msgs2["message_2"])
+        self.assertEqual("<*Client_3*>general kenobi", msgs2.message_2)
+        self.assertEqual(None, msgs1.templates["message_2"])
+        self.assertEqual(None, msgs1.templates.message_2)
+        self.assertEqual("general <*>", msgs2.templates["message_2"])
+        self.assertEqual("general <*>", msgs2.templates.message_2)
+
     def test_delete_version(self) -> None:
         msgs1 = Messages(msgs=msgs, version=1)
         msgs2 = Messages(msgs=msgs, version=2)
