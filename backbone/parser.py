@@ -2,14 +2,25 @@ from backbone.msg_reader import Messages, Templates
 
 import pandas as pd
 import typing as t
+import re
 
 
 class ParserMethods:
+    @staticmethod
+    def __it_has_clients(logs: t.List[str]) -> bool:
+        for log in logs:
+            if "<*Client_" in log:
+                return True
+
     @staticmethod
     def structure_logs(logs: t.List[str]) -> t.Dict[str, t.List[str]]:
         structured = {k: [] for k in [
             "Level", "Module", "Date", "Time", "Content"
         ]}
+        if (has_clients := ParserMethods.__it_has_clients(logs)):
+            client_pattern = re.compile(r"<\*Client_(\d+)\*>")
+            message_pattern = re.compile(r"<\*Client_\d+\*>(.*)")
+            structured["Client"] = []
 
         for log in logs:
             log_ = ":".join(log.split(":")[2:])
@@ -21,7 +32,13 @@ class ParserMethods:
             structured["Module"].append(level_module.split(":")[1])
             structured["Date"].append(date_time.split("/")[0])
             structured["Time"].append(date_time.split("/")[1])
-            structured["Content"].append(rest.replace(level_module, "")[1:])
+
+            rest = rest.replace(level_module, "")[1:]
+            if has_clients:
+                client = client_pattern.search(rest).group(1)
+                structured["Client"].append(int(client))
+                rest = message_pattern.search(rest).group(1) 
+            structured["Content"].append(rest)
 
         return structured
 

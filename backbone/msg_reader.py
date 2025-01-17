@@ -40,7 +40,7 @@ class Messages:
         for name, logs in msgs.items():
             for log in logs:
                 if self.__is_log(log):
-                    self.list_msgs[name] = msgs[name][log]
+                    self.list_msgs[name] = f"{self.prefix}{msgs[name][log]}"
                     setattr(self, name, self.list_msgs[name])
                 elif self.__is_template(log):
                     templates[name] = msgs[name][log]
@@ -52,8 +52,11 @@ class Messages:
 
         self.templates = Templates(templates)   
 
-    def __init__(self, msgs: t.Dict[str, str], version: int = 1) -> None:
+    def __init__(
+        self, msgs: t.Dict[str, str], version: int = 1, client_n: int | None = None
+    ) -> None:
         self.version  = version
+        self.prefix = "" if client_n is None else f"<*Client_{client_n}*>"
         self.__initialize(msgs=msgs)
 
     @classmethod

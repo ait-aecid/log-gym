@@ -80,3 +80,13 @@ class MessagesTestCase(unittest.TestCase):
 
         self.assertEqual("vamos a la playa", msgs1["message_3"])
         self.assertEqual(None, msgs2["message_3"])
+
+    def test_client_prefix(self) -> None:
+        msg1 = Messages(msgs=msgs, version=1, client_n=1)
+        msg2 = Messages(msgs=msgs, version=2, client_n=3)
+
+        self.assertEqual("<*Client_1*>hello there", msg1["message_1"])
+        self.assertEqual("<*Client_3*>general kenobi", msg2["message_1"])
+
+        self.assertEqual(None, msg1.message_2)
+        self.assertEqual("<*Client_3*>general kenobi", msg2["message_2"])
