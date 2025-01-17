@@ -22,7 +22,11 @@ class XrayMachine(ISimulation):
         )
 
     def main(
-        self, case: t.Callable[[t.Any], None], msg: Messages, do_anomaly: bool,
+        self, 
+        case: t.Callable[[t.Any], None], 
+        msg: Messages, 
+        do_anomaly: bool, 
+        client_n: int | None = None
     ) -> None:
         logs.trace(msg.start_simulation)
         case(msg=msg, do_anomaly=do_anomaly)

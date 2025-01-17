@@ -23,7 +23,11 @@ class AccessResources(ISimulation):
         )
 
     def main(
-        self, case: t.Callable[[t.Any], None], msg: Messages, do_anomaly: bool,
+        self, 
+        case: t.Callable[[t.Any], None], 
+        msg: Messages, 
+        do_anomaly: bool, 
+        client_n: int | None = None
     ) -> None:
         
         config = methods.ConfigResource()
