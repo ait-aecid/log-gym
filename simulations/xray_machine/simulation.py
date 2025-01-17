@@ -10,7 +10,7 @@ import typing as t
 
 class XrayMachine(ISimulation):
     """
-    Loading Dependencies challenge
+    Loading XrayMachine challenge
     """
     def __init__(self) -> None:
         super().__init__(
