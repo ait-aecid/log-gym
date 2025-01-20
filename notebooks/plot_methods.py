@@ -31,8 +31,7 @@ def count_clients(path):
         print("No clients in this dataset")
     else:
         stats = {}
-        for clients in df["Client"]:
-            client = eval(clients)[0]
+        for client in df["Client"]:
             stats[client] = stats.get(client, 0) + 1
 
     return pd.DataFrame(stats.items(), columns=["Client", "Count"])

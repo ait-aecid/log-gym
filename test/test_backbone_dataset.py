@@ -155,7 +155,7 @@ class DataGeneratorTestCase(unittest.TestCase):
         self.assertListEqual(
             [["INFO", "INFO"], ["INFO"], ["INFO", "INFO"]], dataset["Level"]
         )
-        self.assertListEqual([[0, 0], [1], [2, 2]], dataset["Client"])
+        self.assertListEqual([[0], [1], [2]], dataset["Client"])
         self.assertListEqual(
             [
                 ["Trying again later", "Resource ready"],

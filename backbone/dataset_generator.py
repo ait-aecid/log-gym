@@ -87,7 +87,8 @@ def process_table(
             dates=table["Date"].to_list(), times=table["Time"].to_list()
         )
         if "Client" in table:
-            dataset["Client"] = table["Client"].to_list()
+            assert len(pd.unique(table["Client"])) == 1, "There are multiple clients"
+            dataset["Client"] = table["Client"].iloc[0]
 
     return dataset
 
