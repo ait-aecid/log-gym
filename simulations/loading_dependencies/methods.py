@@ -40,7 +40,7 @@ def code_structure(dependencies: Dependencies, msg: Messages) -> None:
     logs.info(msg.end_process)
 
 
-def case_1_easier_case(
+def dependencies_challenge_4(
     do_anomaly: bool, msg: Messages, reduction: float | None = None
 ) -> None:
     """
@@ -58,7 +58,7 @@ def case_1_easier_case(
     return code_structure(dependencies=dependencies, msg=msg)
 
 
-def case_2_exchange_times(
+def dependencies_challenge_5(
     do_anomaly: bool, msg: Messages, reduction: float | None = None
 ) -> None:
     """
@@ -84,7 +84,7 @@ def case_2_exchange_times(
     return code_structure(dependencies=dependencies, msg=msg)
 
 
-def case_3_small_difference(
+def dependencies_challenge_6(
     do_anomaly: bool, msg: Messages, reduction: float | None = None
 ) -> None:
     """

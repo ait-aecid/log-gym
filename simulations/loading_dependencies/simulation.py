@@ -15,9 +15,9 @@ class LoadingDependencies(ISimulation):
     def __init__(self) -> None:
         super().__init__(
             cases={
-                "case_1": methods.case_1_easier_case,
-                "case_2": methods.case_2_exchange_times,
-                "case_3": methods.case_3_small_difference,
+                "challenge_4": methods.dependencies_challenge_4,
+                "challenge_5": methods.dependencies_challenge_5,
+                "challenge_6": methods.dependencies_challenge_6,
             }, 
             msg_path="simulations/loading_dependencies/messages.yaml"
         )

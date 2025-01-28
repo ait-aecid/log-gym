@@ -15,8 +15,8 @@ class XrayMachine(ISimulation):
     def __init__(self) -> None:
         super().__init__(
             cases={
-                "case_1": methods.case_1_xray_simple,
-                "case_2": methods.case_2_xray_combine_ver_meas,
+                "challenge_7": methods.medical_challenge_7,
+                "challenge_8": methods.medical_challenge_8,
             }, 
             msg_path="simulations/xray_machine/messages.yaml"
         )

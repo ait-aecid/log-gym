@@ -115,38 +115,38 @@ class DependenciesTestCase(unittest.TestCase):
 path_msg = "simulations/loading_dependencies/messages.yaml"
 
 class CasesTestCase(unittest.TestCase):
-    def test_case1_dont_break(self) -> None:
+    def test_challenge_4_dont_break(self) -> None:
         import backbone.logs as logs 
         logs.store_logs = False
         logs.as_test()
 
         msg = methods.Messages.from_file(path_msg)
-        methods.case_1_easier_case(do_anomaly=False, msg=msg, reduction=700)
+        methods.dependencies_challenge_4(do_anomaly=False, msg=msg, reduction=700)
 
         msg = methods.Messages.from_file(path_msg)
-        methods.case_1_easier_case(do_anomaly=True, msg=msg, reduction=700)
+        methods.dependencies_challenge_4(do_anomaly=True, msg=msg, reduction=700)
 
-    def test_case2_dont_break(self) -> None:
+    def test_challenge_5_dont_break(self) -> None:
         import backbone.logs as logs 
         logs.store_logs = False
         logs.as_test()
 
         msg = methods.Messages.from_file(path_msg)
-        methods.case_2_exchange_times(do_anomaly=False, msg=msg, reduction=700)
+        methods.dependencies_challenge_5(do_anomaly=False, msg=msg, reduction=700)
 
         msg = methods.Messages.from_file(path_msg)
-        methods.case_2_exchange_times(do_anomaly=True, msg=msg, reduction=700)
+        methods.dependencies_challenge_5(do_anomaly=True, msg=msg, reduction=700)
 
-    def test_case3_dont_break(self) -> None:
+    def test_challenge_6_dont_break(self) -> None:
         import backbone.logs as logs 
         logs.store_logs = False
         logs.as_test()
 
         msg = methods.Messages.from_file(path_msg)
-        methods.case_3_small_difference(do_anomaly=False, msg=msg, reduction=700)
+        methods.dependencies_challenge_6(do_anomaly=False, msg=msg, reduction=700)
 
         msg = methods.Messages.from_file(path_msg)
-        methods.case_3_small_difference(do_anomaly=True, msg=msg, reduction=700)
+        methods.dependencies_challenge_6(do_anomaly=True, msg=msg, reduction=700)
 
     def test_condition_method(self) -> None:
         self.assertFalse(all([methods.condition() for _ in range(10)]))

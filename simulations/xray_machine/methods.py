@@ -5,7 +5,7 @@ from backbone.msg_reader import Messages
 import backbone.logs as logs
 
 
-def case_1_xray_simple(
+def medical_challenge_7(
     do_anomaly: bool, msg: Messages, is_test: bool = False
 ) -> None:
     """
@@ -44,7 +44,7 @@ def case_1_xray_simple(
             xray.do_measure()
         
 
-def case_2_xray_combine_ver_meas(
+def medical_challenge_8(
     do_anomaly: bool, msg: Messages, is_test: bool = False
 ) -> None:
     """

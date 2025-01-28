@@ -15,9 +15,9 @@ class AccessResources(ISimulation):
     def __init__(self) -> None:
         super().__init__(
             cases={
-                "case_1": methods.case1_init_resource,
-                "case_2": methods.case2_init_resource,
-                "case_3": methods.case3_init_resource,
+                "challenge_1": methods.resources_challenge_1,
+                "challenge_2": methods.resources_challenge_2,
+                "challenge_3": methods.resources_challenge_3,
             }, 
             msg_path="simulations/access_resource/messages.yaml"
         )

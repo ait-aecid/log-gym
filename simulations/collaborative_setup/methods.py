@@ -31,7 +31,7 @@ class Sender:
             logs.info(self.msg[f"template_{self.template}_send_file"])
         
 
-def case_1_wrong_template(do_anomaly: bool, msg: Messages, client_n: int) -> None:
+def collaborative_challenge_9(do_anomaly: bool, msg: Messages, client_n: int) -> None:
     """
     One of the clients creates a wrong template in the parsing
     """
@@ -48,7 +48,7 @@ def is_admin(do_anomaly: bool, client_n: int) -> bool:
     return do_anomaly or client_n == 0
 
 
-def case_2_infected_client(do_anomaly: bool, msg: Messages, client_n: int) -> None:
+def collaborative_challenge_10(do_anomaly: bool, msg: Messages, client_n: int) -> None:
     """
     Infected clients access as admins and remove users.
     """

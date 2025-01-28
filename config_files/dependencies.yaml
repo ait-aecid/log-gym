@@ -1,7 +1,7 @@
 
 General:
     Simulation: Loading_dependencies
-    Case: case_2
+    Case: challenge_4
     Save_path: results/db/
 
 Train:

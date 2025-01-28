@@ -2,7 +2,7 @@
 
 General:
     Simulation: XRay_machine
-    Case: case_2
+    Case: challenge_7
     Save_path: results/db/
 
 Train:

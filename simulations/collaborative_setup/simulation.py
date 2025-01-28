@@ -14,8 +14,8 @@ class CollaborativeSetup(ISimulation):
     def __init__(self) -> None:
         super().__init__(
             cases={
-                "case_1": methods.case_1_wrong_template,
-                "case_2": methods.case_2_infected_client,
+                "challenge_9": methods.collaborative_challenge_9,
+                "challenge_10": methods.collaborative_challenge_10,
             }, 
             msg_path="simulations/collaborative_setup/messages.yaml",
             multiple_clients=3,

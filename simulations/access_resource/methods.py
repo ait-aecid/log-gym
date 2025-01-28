@@ -31,7 +31,7 @@ class Resource:
         return bool(np.random.choice([0, 1], size=1, p=p))
 
 
-def case1_init_resource(config: ConfigResource, msg: Messages) -> Resource:
+def resources_challenge_1(config: ConfigResource, msg: Messages) -> Resource:
     """
     In case of anomaly, the process is "stuck".
     """
@@ -48,7 +48,7 @@ def case1_init_resource(config: ConfigResource, msg: Messages) -> Resource:
     return resource     
 
 
-def case2_init_resource(config: ConfigResource, msg: Messages) -> Resource:
+def resources_challenge_2(config: ConfigResource, msg: Messages) -> Resource:
     """
     In case of anomaly, the process try 10 times.
     """
@@ -66,7 +66,7 @@ def case2_init_resource(config: ConfigResource, msg: Messages) -> Resource:
     return resource     
 
 
-def case3_init_resource(config: ConfigResource, msg: Messages) -> Resource:
+def resources_challenge_3(config: ConfigResource, msg: Messages) -> Resource:
     """
     In case of anomaly no event distintion with nominaly.
     """
