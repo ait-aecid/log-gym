@@ -4,7 +4,7 @@ Framework to develop test challenges for log anomaly detectors models. Official 
 
 ## Requirements
 
-The code was run with python version 3.12.3. To install the requirements do:
+The code was run with **Python version 3.12.3**. To install the requirements do:
 
 ```bash
 pip install -r requirements.txt 
@@ -16,6 +16,12 @@ python -m unittest discover -s test/
 ```
 
 ## Generate challenges
+First create a folder inside the project call **results**. In linux can be done as:
+
+```bash
+mkdir results
+```
+
 To generate the challenges run:
 
 ```bash
