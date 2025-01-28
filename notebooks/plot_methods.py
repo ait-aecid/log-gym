@@ -29,6 +29,7 @@ def count_clients(path):
 
     if "Client" not in df.columns:
         print("No clients in this dataset")
+        return None
     else:
         stats = {}
         for client in df["Client"]:
