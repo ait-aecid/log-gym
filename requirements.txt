@@ -1,4 +1,11 @@
+# Overall code dependencies
 pandas==2.2.3
-yaml==6.0.2
+PyYAML==6.0.2
 tqdm==4.67.1
+
+# Notebook dependencies
+jupyter==1.1.1
 matplotlib==3.10.0
+sentence-transformers==3.4.0
+scikit-learn==1.6.1
+networkx==3.4.2
