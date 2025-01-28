@@ -43,7 +43,10 @@ Example:
 python main.py --config_file config_files/xray.yaml
 ```
 
-The challenges databases will be save in **results/**. To plot the distributions use **notebooks/data_analysis.ipynb**.
+The challenges databases will be save in **results/**. To plot the distributions use **notebooks/data_analysis.ipynb**. Access the notebook with:
+```bash
+jupyter notebok
+```
 
 ## Docker support
 To run the code inside a docker container use the file **Dockerfile** and change the challenge you want to generate in the variable **CONFIG_FILE** inside **start.sh**.
