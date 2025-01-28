@@ -76,7 +76,7 @@ Anomalies are presented when certain dependencies change the time that it takes 
 *   **Challenge 5**: Dependency d and c exchanges times in abnormal behaviour.
 *   **Challenge 6**: Same as challenge 4, but the time difference is much smaller.
 
-### Medical machine
+### Xray machine
 
 Detect anomalies in an automaton system.
 
