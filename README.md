@@ -2,6 +2,15 @@
 
 Framework to develop test challenges for log anomaly detectors models. Official code base from: **Sok: A Review on Log Anomaly Collaborative Intrusion Detection Systems (2025)**.
 
+
+## Sections 
+1. [Requirements](#requirements)
+2. [Run Unittests](#run-unittests)
+3. [Generate Challenges](#generate-challenges)
+4. [Docker support](#docker-support)
+5. [Challenges](#challenges)
+6. [Citation](#citation)
+
 ## Requirements
 
 The code was run with **Python version 3.12.3**. To install the requirements do:
@@ -36,6 +45,17 @@ python main.py --config_file config_files/xray.yaml
 
 The challenges databases will be save in **results/**. To plot the distributions use **notebooks/data_analysis.ipynb**.
 
+## Docker support
+To run the code inside a docker container use the file **Dockerfile** and change the challenge you want to generate in the variable **CONFIG_FILE** inside **start.sh**.
+
+Build the image with the next command:
+```bash
+docker build -t log-gym .
+```
+And run the container with:
+```bash
+docker run --name log-gym log-gym
+```
 ## Challenges
 
 The configuration files of the implemented challenges can be found in **config_files/**. More information in the publication.
