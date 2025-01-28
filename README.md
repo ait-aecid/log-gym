@@ -5,11 +5,10 @@ Framework to develop test challenges for log anomaly detectors models. Official 
 
 ## Sections 
 1. [Requirements](#requirements)
-2. [Run Unittests](#run-unittests)
-3. [Generate Challenges](#generate-challenges)
-4. [Docker support](#docker-support)
-5. [Challenges](#challenges)
-6. [Citation](#citation)
+2. [Generate Challenges](#generate-challenges)
+3. [Docker support](#docker-support)
+4. [Challenges](#challenges)
+5. [Citation](#citation)
 
 ## Requirements
 
