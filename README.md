@@ -1,6 +1,6 @@
 # Log Gym 
 
-Framework for creating test challenges aimed at models that detect log anomalies. Official code base from: **Sok: A Review on Log Anomaly Collaborative Intrusion Detection Systems (2025)**.
+Framework for creating test challenges aimed at models that detect log anomalies. Official code base from: **A Review on Log Anomaly Collaborative Intrusion Detection Systems (2025)**.
 
 
 ## Sections 
