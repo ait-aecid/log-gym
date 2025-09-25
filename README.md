@@ -1,6 +1,6 @@
 # Log Gym 
 
-Framework for creating test challenges aimed at models that detect log anomalies. Official code base from: **A Review on Log Anomaly Collaborative Intrusion Detection Systems (2025)**.
+Framework for creating test challenges aimed at models that detect log anomalies. Official code base from: **Collaborative anomaly detection in log data: Comparative analysis and evaluation framework**.
 
 
 ## Sections 
@@ -93,4 +93,20 @@ Challenges for Collaborative Intrusion Detection Systems.
 * **Challenge 10**: Infected clients access as admins and remove users are part of the training process.
 
 ## Citation
-()
+```
+@article{GARCIAGOMEZ2026108090,
+  title = {Collaborative anomaly detection in log data: Comparative analysis and evaluation framework},
+  journal = {Future Generation Computer Systems},
+  volume = {175},
+  pages = {108090},
+  year = {2026},
+  issn = {0167-739X},
+  doi = {https://doi.org/10.1016/j.future.2025.108090},
+  url = {https://www.sciencedirect.com/science/article/pii/S0167739X2500384X},
+  author = {André {García Gómez} and Max Landauer and Markus Wurzenberger and Florian Skopik and Edgar Weippl},
+  keywords = {Machine learning, CIDS, IDS, Anomaly detection, AI, Log analysis},
+  abstract = {Log Anomaly Collaborative Intrusion Detection Systems (CIDS) are designed to detect suspicious activities and security breaches by analyzing log files using anomaly detection techniques while leveraging collaboration between multiple entities (e.g., different systems, organizations, or network nodes). Unlike traditional Intrusion Detection Systems (IDS) that require centralized algorithm updates and data aggregation, CIDS enable decentralized updates without extensive data exchange, improving efficacy, scalability, and compliance with regulatory constraints. Additionally, inter-detector communication helps to reduce the number of false positives. These systems are particularly useful in distributed environments, where individual system have limited visibility into potential threats. This paper reviews the current landscape of Log Anomaly CIDS and introduces an open-source framework designed to create benchmark datasets for evaluating system performance. We categorize log anomaly detectors into three categories: Sequential-wise, Embedding-wise, and Graph-wise. Furthermore, our open framework facilitates rigorous evaluation against different challenges identifying weaknesses in existing methods like Deeplog and enhancing model robustness.}
+}
+
+```
+
